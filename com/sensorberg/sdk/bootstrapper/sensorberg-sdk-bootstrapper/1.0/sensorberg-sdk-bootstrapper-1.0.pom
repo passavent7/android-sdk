@@ -19,7 +19,7 @@
     <dependency>
       <groupId>com.sensorberg.sdk</groupId>
       <artifactId>sensorberg-sdk</artifactId>
-      <version>+</version>
+      <version>0.3.4</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
