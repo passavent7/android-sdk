@@ -5,6 +5,7 @@
   <groupId>com.sensorberg.sdk.bootstrapper</groupId>
   <artifactId>sensorberg-sdk-bootstrapper</artifactId>
   <version>1.0</version>
+  <packaging>aar</packaging>
   <name>Sensorberg Android SDK Bootstrapper</name>
   <description>Android SDK bootstrapper that helps to integrate the SDK</description>
   <url>https://github.com/sensorberg-dev/android-sdk</url>
