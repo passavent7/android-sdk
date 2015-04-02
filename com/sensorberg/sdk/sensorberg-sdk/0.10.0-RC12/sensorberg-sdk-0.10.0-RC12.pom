@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.sensorberg.sdk</groupId>
+  <artifactId>sensorberg-sdk</artifactId>
+  <version>0.10.0-RC12</version>
+  <packaging>aar</packaging>
+  <name>Sensorberg Android SDK</name>
+  <description>Android SDK for the Sensorberg beacon management platform</description>
+  <url>https://github.com/sensorberg-dev/android-sdk</url>
+  <inceptionYear>2014</inceptionYear>
+  <scm>
+    <connection>scm:git@github.com:sensorberg-dev/android-sdk.git</connection>
+    <developerConnection>scm:git@github.com:sensorberg-dev/android-sdk.git</developerConnection>
+    <url>scm:git@github.com:sensorberg-dev/android-sdk.git</url>
+  </scm>
+  <dependencies>
+    <dependency>
+      <groupId>com.sensorberg.android</groupId>
+      <artifactId>okvolley</artifactId>
+      <version>1.0.2</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.sensorberg.android</groupId>
+      <artifactId>volley</artifactId>
+      <version>1.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.realm</groupId>
+      <artifactId>realm-android</artifactId>
+      <version>0.79.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.sensorberg.android</groupId>
+      <artifactId>networkstate</artifactId>
+      <version>1.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>
