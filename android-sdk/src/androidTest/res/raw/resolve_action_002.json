@@ -1,0 +1,36 @@
+[
+    {
+        "eid": "B763C589-3AC4-445B-97E3-5866557A91E5",
+        "trigger": 3,
+        "type": 2,
+        "name": "the relevant action for the test",
+        "beacons": [
+            "7367672374000000ffff0000ffff00010133701337",
+            "192e463c9b8e4590a23fd32007299ef50133701337"
+        ],
+        "suppressionTime": 0,
+        "delay": 0,
+        "reportImmediately": false,
+        "content": {
+            "url": "sensorberg://something",
+            "payload": "anything"
+        }
+    },
+    {
+        "eid": "B763C589-3AC4-445B-97E3-5866557A91E5",
+        "trigger": 3,
+        "type": 2,
+        "name": "the relevant action for the test",
+        "beacons": [
+            "7367672374000000ffff0000ffff00010133701337",
+            "192e463c9b8e4590a23fd32007299ef50133701337"
+        ],
+        "suppressionTime": 0,
+        "delay": 0,
+        "reportImmediately": false,
+        "content": {
+            "url": "sensorberg://something",
+            "payload": "anything"
+        }
+    }
+]

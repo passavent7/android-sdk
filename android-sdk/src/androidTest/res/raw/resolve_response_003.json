@@ -1,0 +1,36 @@
+{
+    "accountProximityUUIDs": [
+        "7367672374000000ffff0000ffff0001",
+        "7367672374000000ffff0000ffff0002",
+        "7367672374000000ffff0000ffff0003"
+    ],
+    "actions": [
+        {
+            "eid":"D0F8A7-B0CF-446D-981B-F33077997FA8",
+            "trigger": 3,
+            "type": 1,
+            "name": "name",
+            "beacons": [
+                "7367672374000000ffff0000ffff00010133701337",
+                "7367672374000000ffff0000ffff00020133701337"
+            ],
+            "delay": 0,
+            "reportImmediately": true
+        }
+    ],
+    "instantActions":
+    [
+        {
+            "eid":"03403819-3C8B-4B6A-AA15-A3E1F562EF1F",
+            "type": 2,
+            "name": "name",
+            "delay": 0,
+            "content": {
+                "body": "hello world message body ",
+                "subject": "Sensorberg Subject",
+                "url": "http://sensorberg.com",
+                "payload": {}
+            }
+        }
+    ]
+}

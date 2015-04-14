@@ -1,0 +1,19 @@
+{
+    "statusCode" : 200,
+    "headers": {
+        "Cache-Control": "no-transform,public,max-age=1",
+        "Content-Type": " application/json",
+        "Etag": "1416996436511"
+    },
+    "body": {
+        "settings": {
+            "scanner.backgroundScanTime": 10001,
+            "scanner.foreGroundWaitTime": 1000,
+            "settings.updateTime": 86400000,
+            "scanner.foreGroundScanTime": 10001,
+            "scanner.exitTimeoutMillies": 9001,
+            "one_day": 86400000,
+            "scanner.backgroundWaitTime": 120000
+        }
+    }
+}

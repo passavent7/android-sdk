@@ -1,0 +1,73 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Cache-Control": "no-transform,public,max-age=10000",
+        "Content-Type": " application/json",
+        "Etag": "1416996436511"
+    },
+    "body": {
+        "accountProximityUUIDs": [
+            "7367672374000000ffff0000ffff0001",
+            "7367672374000000ffff0000ffff0002",
+            "7367672374000000ffff0000ffff0003",
+            "7367672374000000ffff0000ffff0004",
+            "192e463c9b8e4590a23fd32007299ef5"
+        ],
+        "actions": [
+            {
+                "eid": "D0F8A7-B0CF-446D-981B-F33077997FA8",
+                "trigger": 3,
+                "type": 1,
+                "name": "name-entry-exit-1-2",
+                "beacons": [
+                    "7367672374000000ffff0000ffff00010133701337",
+                    "7367672374000000ffff0000ffff00020133701337"
+                ],
+                "suppressionTime": 0,
+                "delay": 0,
+                "reportImmediately": false,
+                "content": {
+                    "body": "hello world message body ",
+                    "subject": "Sensorberg Subject",
+                    "url": "http://sensorberg.com",
+                    "payload": "anything"
+                }
+            },
+            {
+                "eid": "F16FB576-CD77-4B1E-8B16-654A7CDACFFA",
+                "trigger": 1,
+                "type": 2,
+                "name": "name-entry-1-3",
+                "beacons": [
+                    "7367672374000000ffff0000ffff00030133701337",
+                    "7367672374000000ffff0000ffff00040133701337"
+                ],
+                "suppressionTime": 0,
+                "delay": 0,
+                "reportImmediately": false,
+                "content": {
+                    "url": "http://sensorberg.com",
+                    "payload": "anything"
+                }
+            },
+            {
+                "eid": "B763C589-3AC4-445B-97E3-5866557A91E5",
+                "trigger": 3,
+                "type": 2,
+                "name": "the relevant action for the test",
+                "beacons": [
+                    "7367672374000000ffff0000ffff00010133701337",
+                    "192e463c9b8e4590a23fd32007299ef50133701337"
+                ],
+                "suppressionTime": 0,
+                "delay": 0,
+                "reportImmediately": false,
+                "content": {
+                    "url": "sensorberg://something",
+                    "payload": "anything"
+                }
+            }
+        ],
+        "instantActions": []
+    }
+}

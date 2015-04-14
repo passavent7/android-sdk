@@ -1,0 +1,12 @@
+{
+    "headers": {
+    },
+
+    "body": {
+        "deviceTimestamp" : "1970-01-01T00:00:00Z",
+        "actions": [],
+        "events": [
+            { "bid" : "192E463C9B8E4590A23FD32007299EF50133701337", "dt" : "1970-01-01T00:00:00Z", "trigger" : "entry"}
+        ]
+    }
+}

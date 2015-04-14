@@ -1,0 +1,118 @@
+package com.sensorberg.sdk.internal;
+
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+
+import com.sensorberg.sdk.Constants;
+import com.sensorberg.sdk.Logger;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class AndroidHandler implements RunLoop {
+    private final MessageHandlerCallback messageHandlerCallback;
+    private final LooperThread looper;
+    private Timer timer;
+
+    public AndroidHandler(MessageHandlerCallback messageHandlerCallback) {
+        this.messageHandlerCallback = messageHandlerCallback;
+
+        looper = new LooperThread();
+        looper.start();
+    }
+
+    @Override
+    public void add(Message event) {
+        getHandler().sendMessage(event);
+    }
+
+    @Override
+    public void clearScheduledExecutions() {
+        if (looper.handler != null) {
+            looper.handler.removeCallbacksAndMessages(null);
+        }
+    }
+
+    @Override
+    public void scheduleExecution(Runnable runnable, long wait_time) {
+        if (wait_time > 0) {
+            if (wait_time > Constants.Time.ONE_HOUR * 24) {
+                wait_time = Constants.Time.ONE_HOUR * 24;
+            }
+
+            boolean result = getHandler().postDelayed(runnable, wait_time);
+            if (!result) {
+                Logger.log.logError("could not schedule the runable in " + wait_time + " millis");
+            }
+        } else {
+            runnable.run();
+        }
+    }
+
+    private Handler getHandler() {
+        while (looper.handler == null) {
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                Logger.log.logError("looper was null, so we tried to sleep the thread...", e);
+            }
+        }
+        return looper.handler;
+    }
+
+    @Override
+    public void scheduleAtFixedRate(TimerTask timerTask, int when, long interval) {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+            Logger.log.logError("There is already an execution scheduled");
+        }
+        timer = new Timer();
+        timer.scheduleAtFixedRate(timerTask, when, interval);
+    }
+
+    @Override
+    public void cancelFixedRateExecution() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+    }
+
+    @Override
+    public Message obtainMessage(int what) {
+        return getHandler().obtainMessage(what);
+    }
+
+    @Override
+    public Message obtainMessage(int what, Object obj) {
+        return getHandler().obtainMessage(what, obj);
+    }
+
+    @Override
+    public void sendMessage(int what) {
+        add(obtainMessage(what));
+    }
+
+    @Override
+    public void sendMessage(int what, Object obj) {
+        add(obtainMessage(what, obj));
+    }
+
+    class LooperThread extends Thread {
+        public Handler handler;
+
+        public void run() {
+            Looper.prepare();
+
+            handler = new Handler() {
+                public void handleMessage(Message msg) {
+                    messageHandlerCallback.handleMessage(msg);
+                }
+            };
+
+            Looper.loop();
+        }
+    }
+}

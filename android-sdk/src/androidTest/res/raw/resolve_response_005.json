@@ -1,0 +1,33 @@
+{
+    "accountProximityUUIDs": [
+        "7367672374000000ffff0000ffff0001",
+        "7367672374000000ffff0000ffff0002",
+        "7367672374000000ffff0000ffff0003",
+        "7367672374000000ffff0000ffff0004"
+    ],
+    "actions": [
+        {
+            "content": {
+                "payload": "anything",
+                "url": "sensorberg://something"
+            },
+            "reportImmediately": false,
+            "trigger": 3,
+            "name": "the relevant action for the test",
+            "beacons": [
+                "7367672374000000ffff0000ffff00010133701337",
+                "192e463c9b8e4590a23fd32007299ef50133701337"
+            ],
+            "delay": 0,
+            "type": 2,
+            "eid": "B763C589-3AC4-445B-97E3-5866557A91E5",
+            "suppressionTime": 0,
+            "timeFrames" : [
+                { "start" : null,                   "end" : "1969-01-01T00:00:00Z" },
+                { "start" : "1970-01-01T00:00:00Z", "end" : "1970-01-02T00:00:00Z" },
+                { "start" : "1971-01-01T00:00:00Z", "end" : null }
+            ]
+        }
+    ],
+    "instantActions": []
+}

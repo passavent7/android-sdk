@@ -1,0 +1,37 @@
+{
+    "eid": "B763C589-3AC4-445B-97E3-5866557A91E5",
+    "trigger": 3,
+    "type": 2,
+    "name": "the relevant action for the test",
+    "beacons": [
+        "7367672374000000ffff0000ffff00010133701337",
+        "192e463c9b8e4590a23fd32007299ef50133701337"
+    ],
+    "suppressionTime": 0,
+    "delay": 0,
+    "reportImmediately": false,
+    "content": {
+        "url": "sensorberg://something",
+        "payload": {
+            "string": "string",
+            "true" : true,
+            "false" : false,
+            "null": null,
+            "integer": 123456,
+            "double" : 1.2345,
+            "long" : 9223372036854775806,
+            "longWithE" : 9223372036E9,
+            "doubleWithE" : 1.4E-4,
+            "object": {
+                "foo": "bar"
+            },
+            "array": [
+                "a",
+                "b",
+                1,
+                2,
+                null
+            ]
+        }
+    }
+}

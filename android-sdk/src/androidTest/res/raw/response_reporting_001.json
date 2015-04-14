@@ -1,0 +1,13 @@
+{
+    "statusCode" : 200,
+    "headers": {
+    },
+    "body": {
+        "accountProximityUUIDs": [
+            "7367672374000000ffff0000ffff0001",
+            "7367672374000000ffff0000ffff0002",
+            "7367672374000000ffff0000ffff0003"
+        ],
+        actions: {}
+    }
+}

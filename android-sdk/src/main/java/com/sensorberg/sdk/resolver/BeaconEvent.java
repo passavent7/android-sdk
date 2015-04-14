@@ -1,0 +1,215 @@
+package com.sensorberg.sdk.resolver;
+
+import android.content.SyncRequest;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.sensorberg.sdk.action.Action;
+import com.sensorberg.sdk.action.UriMessageAction;
+import com.sensorberg.sdk.model.BeaconId;
+import com.sensorberg.sdk.scanner.ScanEvent;
+
+import java.util.Date;
+
+/**
+ * Class {@link BeaconEvent} represents a {@link ScanEvent} that has been resolved by the sensorberg backend.
+ */
+public class BeaconEvent implements Parcelable {
+
+    /**
+     * {@link android.os.Parcelable.Creator} for the {@link android.os.Parcelable} interface
+     */
+    @SuppressWarnings("hiding")
+    public static final Creator<BeaconEvent> CREATOR = new Creator<BeaconEvent>() {
+        public BeaconEvent createFromParcel(Parcel in) {
+            return (new BeaconEvent(in));
+        }
+
+        public BeaconEvent[] newArray(int size) {
+            return (new BeaconEvent[size]);
+        }
+    };
+
+    private Action action;
+    private final long resolvedTime;
+    /**
+     * time when the action is beeing actually presented, not used neccesary to be added to the @{Parcel}
+     */
+    private long presentationTime;
+    private long suppressionTimeMillis;
+    public final boolean sendOnlyOnce;
+    public final Date deliverAt;
+    public final int trigger;
+    private BeaconId beaconId;
+
+    private BeaconEvent(Action action, long resolvedTime, long presentationTime, long suppressionTime, boolean sendOnlyOnce, Date deliverAt, int trigger) {
+        this.action = action;
+        this.resolvedTime = resolvedTime;
+        this.presentationTime = presentationTime;
+        this.suppressionTimeMillis = suppressionTime;
+        this.sendOnlyOnce = sendOnlyOnce;
+        this.deliverAt = deliverAt;
+        this.trigger = trigger;
+    }
+
+    protected BeaconEvent(Parcel source) {
+        action = source.readParcelable(Action.class.getClassLoader());
+        resolvedTime = source.readLong();
+        suppressionTimeMillis = source.readLong();
+        sendOnlyOnce = source.readInt() == 1;
+        boolean hasDeliverAt = source.readInt() == 1;
+        if (hasDeliverAt) {
+            deliverAt = new Date(source.readLong());
+        } else {
+            deliverAt = null;
+        }
+        trigger = source.readInt();
+        beaconId = source.readParcelable(BeaconId.class.getClassLoader());
+    }
+
+    @Override
+    public int describeContents() {
+        return (0);
+    }
+
+    @Override
+    public void writeToParcel(Parcel destination, int flags) {
+        destination.writeParcelable(action, flags);
+        destination.writeLong(resolvedTime);
+        destination.writeLong(suppressionTimeMillis);
+        destination.writeInt(sendOnlyOnce ? 1 : 0);
+        if (deliverAt != null){
+            destination.writeInt(1);
+            destination.writeLong(deliverAt.getTime());
+        } else {
+            destination.writeInt(0);
+        }
+        destination.writeInt(trigger);
+        destination.writeParcelable(beaconId, flags);
+    }
+
+    /**
+     * Returns the {@link Action} to be triggered by the {@link BeaconEvent}.
+     *
+     * @return the {@link Action} to be triggered by the {@link BeaconEvent}
+     */
+    public Action getAction() {
+        return (action);
+    }
+
+    /**
+     * Returns the time the {@link BeaconEvent} was resolved.
+     *
+     * @return the time the {@link BeaconEvent} was resolved
+     */
+    public long getResolvedTime() {
+        return (resolvedTime);
+    }
+
+    public long getPresentationTime() {
+        return presentationTime;
+    }
+
+    public void setPresentationTime(long presentationTime) {
+        this.presentationTime = presentationTime;
+    }
+
+    public long getSuppressionTimeMillis() {
+        return suppressionTimeMillis;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BeaconEvent that = (BeaconEvent) o;
+
+        if (action != null ? !action.equals(that.action) : that.action != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return action != null ? action.hashCode() : 0;
+    }
+
+    public void setBeaconId(BeaconId beaconId) {
+        this.beaconId = beaconId;
+    }
+
+    public BeaconId getBeaconId() {
+        return beaconId;
+    }
+
+
+    public static class Builder {
+        private Action action;
+        private long resolvedTime;
+        private long presentationTime;
+        private long suppressionTime;
+        private boolean sendOnlyOnce;
+        private Date deliverAt;
+        private int trigger;
+
+        public Builder() {
+        }
+
+        public Builder withAction(Action action) {
+            this.action = action;
+            return this;
+        }
+
+        public Builder withResolvedTime(long resolvedTime) {
+            this.resolvedTime = resolvedTime;
+            return this;
+        }
+
+        public Builder withSuppressionTime(long suppressionTime){
+            this.suppressionTime = suppressionTime;
+            return this;
+        }
+
+        public Builder withPresentationTime(long presentationTime) {
+            this.presentationTime = presentationTime;
+            return this;
+        }
+
+        public BeaconEvent build() {
+            return new BeaconEvent(action, resolvedTime, presentationTime, suppressionTime, sendOnlyOnce, deliverAt, trigger);
+        }
+
+        @Override
+        public String toString() {
+            return "Builder{" +
+                    "action=" + action +
+                    ", resolvedTime=" + resolvedTime +
+                    ", presentationTime=" + presentationTime +
+                    ", suppressionTime=" + suppressionTime +
+                    ", sendOnlyOnce=" + sendOnlyOnce +
+                    ", deliverAt=" + deliverAt +
+                    ", trigger=" + trigger +
+                    '}';
+        }
+
+        public Builder withSendOnlyOnce(boolean sentOnlyOnce) {
+            this.sendOnlyOnce = sentOnlyOnce;
+            return this;
+        }
+
+        public Builder withDeliverAtDate(Date deliverAt) {
+            if (deliverAt != null) {
+                this.sendOnlyOnce = true;
+                this.deliverAt = deliverAt;
+                this.suppressionTime = 0;
+            }
+            return this;
+        }
+
+        public Builder withTrigger(int trigger) {
+            this.trigger = trigger;
+            return this;
+        }
+    }
+}

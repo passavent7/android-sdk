@@ -1,0 +1,9 @@
+{
+    "statusCode" : 304,
+    "headers": {
+        "Cache-Control": "no-transform,public,max-age=86400,s-maxage=86400",
+        "Content-Type": " application/json",
+        "Etag": "1416996436511"
+    },
+    "body": {}
+}

@@ -1,0 +1,114 @@
+apply plugin: 'com.android.library'
+apply plugin: 'checkstyle'
+apply plugin: 'com.github.dcendents.android-maven'
+
+dependencies {
+    androidTestCompile 'com.squareup:fest-android:1.0.8'
+    androidTestCompile "org.mockito:mockito-core:1.9.5"
+    androidTestCompile 'com.google.dexmaker:dexmaker:1.0'
+    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.0'
+    androidTestCompile ('com.android.support.test.espresso:espresso-core:2.0'){
+        exclude group: 'com.squareup', module: 'javawriter'
+    }
+    androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
+    androidTestCompile 'org.apache.commons:commons-io:1.3.2'
+    androidTestCompile('com.squareup.okhttp:mockwebserver:2.1.0') {
+        exclude group: 'com.squareup.okhttp'
+    }
+    androidTestCompile 'org.apache.commons:commons-io:1.3.2'
+
+    compile project(':networkstate')
+    compile project(':okvolley')
+    compile project(':volley')
+
+    compile 'io.realm:realm-android:0.79.1'
+}
+
+group = "com.sensorberg.sdk"
+archivesBaseName = 'android-sdk'
+version = "${project.ext.SDK_VERSION}${project.ext.RC_VERSION}"
+
+android {
+    buildToolsVersion project.ext.buildToolsVersion
+    compileSdkVersion project.ext.compileSdkVersion
+    defaultConfig {
+        versionCode 7
+        versionName version
+        minSdkVersion 9
+        targetSdkVersion project.ext.targetSdkVersion
+        buildConfigField "String", "SDK_VERSION", "\"" + project.ext.SDK_VERSION + "\""
+
+		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        disable 'InvalidPackage', 'CommitPrefEdits', 'DefaultLocale'
+        lintConfig file("realm-lint.xml")
+
+    }
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/LICENSE.txt'
+    }
+
+    compileOptions {
+        encoding "UTF-8"
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    jacoco {
+        version = '0.6.2.201302030002'
+    }
+
+    buildTypes {
+        debug {
+            multiDexEnabled true
+            testCoverageEnabled = true;
+        }
+        release {
+            minifyEnabled false
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+            proguardFile 'proguard-release.txt'
+            proguardFile 'proguard-realm.txt'
+        }
+        minified {
+            minifyEnabled true
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+            proguardFile 'proguard-proguarded.txt'
+            proguardFile 'proguard-realm.txt'
+        }
+    }
+}
+
+checkstyle {
+    configFile project.file('checkstyle.xml')
+    showViolations true
+}
+
+apply from: '../bintrayUpload.gradle'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.project {
+                inceptionYear '2014'
+                name 'Sensorberg Android SDK'
+                artifactId project.archivesBaseName
+                groupId = project.group
+                packaging 'aar'
+                description 'Android SDK for the Sensorberg beacon management platform'
+                url 'https://github.com/sensorberg-dev/android-sdk'
+
+                scm {
+                    url 'scm:git@github.com:sensorberg-dev/android-sdk.git'
+                    connection 'scm:git@github.com:sensorberg-dev/android-sdk.git'
+                    developerConnection 'scm:git@github.com:sensorberg-dev/android-sdk.git'
+                }
+            }
+        }
+    }
+}
+
+
+
+
