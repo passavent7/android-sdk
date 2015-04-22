@@ -270,6 +270,13 @@ public class SensorbergService extends Service {
                         }
                         break;
                     }
+                    case MSG_REGISTER_PRESENTATION_DELEGATE:{
+                        if (intent.hasExtra(EXTRA_MESSENGER)) {
+                            Messenger messenger = intent.getParcelableExtra(EXTRA_MESSENGER);
+                            presentationDelegates.add(messenger);
+                        }
+                        break;
+                    }
                     case MSG_UNREGISTER_PRESENTATION_DELEGATE: {
                         if (intent.hasExtra(EXTRA_MESSENGER)) {
                             Messenger messenger = intent.getParcelableExtra(EXTRA_MESSENGER);
@@ -381,7 +388,9 @@ public class SensorbergService extends Service {
     private void createBootstrapperFromDiskConfiguration() {
         try {
             ServiceConfiguration diskConf = (ServiceConfiguration) FileHelper.getContentsOfFileOrNull(platform.getFile(SERVICE_CONFIGURATION));
-            URLFactory.setLayoutURL(diskConf.resolverConfiguration.getResolverLayoutURL().toString());
+            if (diskConf.resolverConfiguration.getResolverLayoutURL() != null){
+                URLFactory.setLayoutURL(diskConf.resolverConfiguration.getResolverLayoutURL().toString());
+            }
             if (diskConf.isComplete()) {
                 platform.getTransport().setApiToken(diskConf.resolverConfiguration.apiToken);
                 bootstrapper = new InternalApplicationBootstrapper(platform);
