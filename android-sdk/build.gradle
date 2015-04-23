@@ -62,7 +62,6 @@ android {
 
     buildTypes {
         debug {
-            multiDexEnabled true
             testCoverageEnabled = true;
         }
         release {
