@@ -92,8 +92,6 @@ public class OkVolleyShouldCacheTheSettingsWithEtags extends SensorbergApplicati
         tested.getSettings(MUST_NOT_FAIL);
 
         waitForRequests(2);
-
-        Assertions.assertThat(server.getRequestCount()).overridingErrorMessage("there should be two request.").isEqualTo(2);
     }
 
 

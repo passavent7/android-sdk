@@ -106,7 +106,7 @@ public class CacheDispatcher extends Thread {
                 }
 
                 // If it is completely expired, just send it to the network.
-                if (entry.isExpired()) {
+                if (entry.isExpired() || request.shouldAlwaysTryWithNetwork()) {
                     request.addMarker("cache-hit-expired");
                     request.setCacheEntry(entry);
                     mNetworkQueue.put(request);

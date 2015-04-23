@@ -35,6 +35,7 @@ public class HeadersJsonObjectRequest<T> extends JsonRequest<T> {
             .registerTypeAdapter(RealmAction.class, new RealmAction.RealmActionTypeAdapter(dateFormat))
             .registerTypeAdapter(JSONObject.class, new JSONObjectTyeAdapter())
             .create();
+    private boolean shouldAlwaysTryWithNetwork;
 
     public HeadersJsonObjectRequest(int method, String url, Map<String, String> headers, Object body, Response.Listener<T> listener, Response.ErrorListener errorListener, Class<T> clazz) {
         super(method, url, body == null ? null : gson.toJson(body), listener, errorListener);
@@ -75,5 +76,15 @@ public class HeadersJsonObjectRequest<T> extends JsonRequest<T> {
                 return Response.error(new ParseError(e));
             }
         }
+    }
+
+    public HeadersJsonObjectRequest<T> setShouldAlwaysTryWithNetwork(boolean shouldAlwaysTryWithNetwork) {
+        this.shouldAlwaysTryWithNetwork = shouldAlwaysTryWithNetwork;
+        return this;
+    }
+
+    @Override
+    public boolean shouldAlwaysTryWithNetwork() {
+        return shouldAlwaysTryWithNetwork;
     }
 }

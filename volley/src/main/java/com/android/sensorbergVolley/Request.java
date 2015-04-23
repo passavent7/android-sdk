@@ -487,6 +487,13 @@ public abstract class Request<T> implements Comparable<Request<T>> {
     }
 
     /**
+     * Flag indicating, that it should always try to make a network request, regardless of the cache content.
+     */
+    public boolean shouldAlwaysTryWithNetwork() {
+        return false;
+    }
+
+    /**
      * Priority values.  Requests will be processed from higher priorities to
      * lower priorities, in FIFO order.
      */

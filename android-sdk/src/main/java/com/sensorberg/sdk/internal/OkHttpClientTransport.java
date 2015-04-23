@@ -21,7 +21,6 @@ import com.sensorberg.sdk.resolver.BeaconEvent;
 import com.sensorberg.sdk.resolver.ResolutionConfiguration;
 import com.sensorberg.sdk.scanner.ScanEvent;
 import com.sensorberg.sdk.settings.Settings;
-import com.sensorberg.utils.ListUtils;
 import com.sensorberg.utils.Objects;
 
 import org.apache.http.HttpStatus;
@@ -83,7 +82,7 @@ public class OkHttpClientTransport implements Transport {
                 proximityUUIDUpdateHandler.proximityUUIDListUpdated(response.getAccountProximityUUIDs());
             }
         };
-        perform(Request.Method.GET, getResolveURLString(), null, listener, Response.ErrorListener.NONE, BaseResolveResponse.class, Collections.EMPTY_MAP);
+        perform(Request.Method.GET, getResolveURLString(), null, listener, Response.ErrorListener.NONE, BaseResolveResponse.class, Collections.EMPTY_MAP, true);
     }
 
     @Override
@@ -120,7 +119,7 @@ public class OkHttpClientTransport implements Transport {
             }
         };
 
-        perform(Request.Method.GET, beaconURLString, null, listener, errorlistener, ResolveResponse.class, beaconHeader(resolutionConfiguration.getScanEvent()));
+        perform(Request.Method.GET, beaconURLString, null, listener, errorlistener, ResolveResponse.class, beaconHeader(resolutionConfiguration.getScanEvent()), false);
 
     }
 
@@ -135,19 +134,20 @@ public class OkHttpClientTransport implements Transport {
     }
 
     public void perform(String url, Response.Listener<JSONObject> listener, Response.ErrorListener errorlistener) {
-        perform(Request.Method.GET, url, null, listener, errorlistener);
+        perform(Request.Method.GET, url, null, listener, errorlistener, false);
     }
-    public void perform(int method, String url, Object body, Response.Listener<JSONObject> listener, Response.ErrorListener errorlistener) {
-        perform(method, url, body, listener, errorlistener, JSONObject.class, Collections.EMPTY_MAP);
+    public void perform(int method, String url, Object body, Response.Listener<JSONObject> listener, Response.ErrorListener errorlistener, boolean shouldAlwaysTryWithNetwork) {
+        perform(method, url, body, listener, errorlistener, JSONObject.class, Collections.EMPTY_MAP, shouldAlwaysTryWithNetwork);
     }
 
-    public <T> void perform(int method, String url, Object body, Response.Listener<T> listener, Response.ErrorListener errorlistener, Class<T> clazz, Map<String, String> headers) {
+    public <T> void perform(int method, String url, Object body, Response.Listener<T> listener, Response.ErrorListener errorlistener, Class<T> clazz, Map<String, String> headers, boolean shouldAlwaysTryWithNetwork) {
         Map<String, String> requestHeaders = new HashMap<>(headers);
         requestHeaders.putAll(this.headers);
 
         if (platform.useSyncClient()){
             RequestFuture<T> future = RequestFuture.newFuture();
-            HeadersJsonObjectRequest<T> request = new HeadersJsonObjectRequest<>(method, url, requestHeaders, body, future, future, clazz);
+            HeadersJsonObjectRequest<T> request = new HeadersJsonObjectRequest<>(method, url, requestHeaders, body, future, future, clazz)
+                    .setShouldAlwaysTryWithNetwork(shouldAlwaysTryWithNetwork);
             setupRetries(request);
             queue.add(request);
             try {
@@ -161,7 +161,8 @@ public class OkHttpClientTransport implements Transport {
                 errorlistener.onErrorResponse(new VolleyError(e));
             }
         } else {
-            HeadersJsonObjectRequest<T> request = new HeadersJsonObjectRequest<>(method, url, requestHeaders, body, listener, errorlistener, clazz);
+            HeadersJsonObjectRequest<T> request = new HeadersJsonObjectRequest<>(method, url, requestHeaders, body, listener, errorlistener, clazz)
+                    .setShouldAlwaysTryWithNetwork(shouldAlwaysTryWithNetwork);;
             setupRetries(request);
             queue.add(request);
         }
@@ -250,7 +251,7 @@ public class OkHttpClientTransport implements Transport {
 
         HistoryBody body = new HistoryBody(scans, actions, platform.getClock());
 
-        perform(Request.Method.POST, getResolveURLString(), body, responseListener, errorListener, ResolveResponse.class, Collections.EMPTY_MAP);
+        perform(Request.Method.POST, getResolveURLString(), body, responseListener, errorListener, ResolveResponse.class, Collections.EMPTY_MAP, false);
 
     }
 }

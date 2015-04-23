@@ -15,6 +15,7 @@ import com.sensorberg.sdk.scanner.ScanEventType;
 import com.sensorberg.sdk.testUtils.TestPlatform;
 import com.squareup.okhttp.CacheControl;
 import com.squareup.okhttp.mockwebserver.MockResponse;
+import com.squareup.okhttp.mockwebserver.RecordedRequest;
 
 import org.fest.assertions.api.Assertions;
 import org.json.JSONException;
@@ -166,15 +167,26 @@ public class TheInternalBootstrapperIntegration extends SensorbergApplicationTes
 
         //simulate the entry
         tested.onScanEventDetected(new ScanEvent.Builder()
-                .withBeaconId(TestConstants.ANY_BEACON_ID)
-                .withEventMask(ScanEventType.ENTRY.getMask())
-                .build()
+                        .withBeaconId(TestConstants.ANY_BEACON_ID)
+                        .withEventMask(ScanEventType.ENTRY.getMask())
+                        .build()
         );
 
         //we should have exactly one notification
         Assertions.assertThat(TestGenericBroadcastReceiver.getLatch().await(10, TimeUnit.SECONDS)).isTrue();
 
         Assertions.assertThat(server.getRequestCount()).isEqualTo(1);
+    }
+
+    public void test_if_the_precaching_always_fetches_from_network() throws IOException, JSONException, InterruptedException {
+        enqueue(com.sensorberg.sdk.test.R.raw.response_resolve_precaching);
+        enqueue(com.sensorberg.sdk.test.R.raw.response_resolve_precaching);
+
+        tested.updateBeaconLayout();
+        tested.updateBeaconLayout();
+
+        RecordedRequest secondRequest = waitForRequests(2).get(1);
+        Assertions.assertThat(secondRequest.getHeader("If-None-Match")).isNotNull().isNotEmpty();
     }
 
     public void test_precaching_of_account_proximityUUIDS() throws IOException, JSONException, InterruptedException {
