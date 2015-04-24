@@ -113,6 +113,13 @@ public class CacheDispatcher extends Thread {
                     continue;
                 }
 
+                if (request.shouldAlwaysTryWithNetwork()) {
+                    request.addMarker("cache-hit-refresh-requested");
+                    request.setCacheEntry(entry);
+                    mNetworkQueue.put(request);
+                    continue;
+                }
+
                 // We have a cache hit; parse its data for delivery back to the request.
                 request.addMarker("cache-hit");
                 Response<?> response = request.parseNetworkResponse(

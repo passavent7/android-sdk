@@ -16,8 +16,6 @@
 
 package com.android.sensorbergVolley;
 
-import org.json.JSONObject;
-
 /**
  * Encapsulates a parsed response for delivery.
  *
@@ -27,23 +25,16 @@ public class Response<T> {
 
     /** Callback interface for delivering parsed responses. */
     public interface Listener<T> {
-        public static Listener NONE = new Listener() {
-            @Override
-            public void onResponse(Object response) {
-
-            }
-        };
-
         /** Called when a response is received. */
         public void onResponse(T response);
     }
 
     /** Callback interface for delivering error responses. */
     public interface ErrorListener {
-        com.android.sensorbergVolley.Response.ErrorListener NONE = new ErrorListener() {
+        ErrorListener NONE = new ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.e("Error when there was no listener: %s", error.getLocalizedMessage());
+
             }
         };
 

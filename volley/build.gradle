@@ -9,11 +9,12 @@ apply plugin: 'com.android.library'
 
 group = "com.sensorberg.android"
 archivesBaseName = getName()
-version = "1.0.1"
+version = "1.2.0"
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
     buildToolsVersion = project.ext.buildToolsVersion
 }
 
+apply from: '../uploadConf.gradle'
 apply from: '../bintrayUpload.gradle'

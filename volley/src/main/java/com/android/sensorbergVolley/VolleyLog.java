@@ -23,9 +23,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/** Logging helper class. */
+/**
+ * Logging helper class.
+ * <p/>
+ * to see Volley logs call:<br/>
+ * {@code <android-sdk>/platform-tools/adb shell setprop log.tag.Volley VERBOSE}
+ */
 public class VolleyLog {
-    public static String TAG = "SensorbergVolley";
+    public static String TAG = "Volley";
 
     public static boolean DEBUG = Log.isLoggable(TAG, Log.VERBOSE);
 

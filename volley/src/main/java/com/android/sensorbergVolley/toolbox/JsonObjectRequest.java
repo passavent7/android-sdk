@@ -48,10 +48,6 @@ public class JsonObjectRequest extends JsonRequest<JSONObject> {
                     errorListener);
     }
 
-    public JsonObjectRequest(int method, String url, String requestBody, Listener<JSONObject> listener, ErrorListener errorListener) {
-        super(method, url, requestBody, listener, errorListener);
-    }
-
     /**
      * Constructor which defaults to <code>GET</code> if <code>jsonRequest</code> is
      * <code>null</code>, <code>POST</code> otherwise.
@@ -67,8 +63,8 @@ public class JsonObjectRequest extends JsonRequest<JSONObject> {
     @Override
     protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
         try {
-            String jsonString =
-                new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+            String jsonString = new String(response.data,
+                    HttpHeaderParser.parseCharset(response.headers, PROTOCOL_CHARSET));
             return Response.success(new JSONObject(jsonString),
                     HttpHeaderParser.parseCacheHeaders(response));
         } catch (UnsupportedEncodingException e) {

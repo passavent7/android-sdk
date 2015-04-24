@@ -62,7 +62,7 @@ public class TransportShould extends SensorbergApplicationTest {
 
     }
 
-    public void test_should_forward_the_layout_opload_interval_to_the_settings() throws Exception {
+    public void test_should_forward_the_layout_upload_interval_to_the_settings() throws Exception {
         startWebserver(com.sensorberg.sdk.test.R.raw.resolve_resolve_with_report_trigger);
         tested.getBeacon(new ResolutionConfiguration.Builder()
                 .withScanEvent(scanEvent)
