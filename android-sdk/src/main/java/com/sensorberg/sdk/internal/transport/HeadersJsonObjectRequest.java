@@ -24,6 +24,7 @@ public class HeadersJsonObjectRequest<T> extends JsonRequest<T> {
 
     private final Map<String, String> headers;
     private final Class<T> clazz;
+    private boolean shouldAlwaysTryWithNetwork = false;
 
     private static String dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 
@@ -35,7 +36,7 @@ public class HeadersJsonObjectRequest<T> extends JsonRequest<T> {
             .registerTypeAdapter(RealmAction.class, new RealmAction.RealmActionTypeAdapter(dateFormat))
             .registerTypeAdapter(JSONObject.class, new JSONObjectTyeAdapter())
             .create();
-    private boolean shouldAlwaysTryWithNetwork;
+
 
     public HeadersJsonObjectRequest(int method, String url, Map<String, String> headers, Object body, Response.Listener<T> listener, Response.ErrorListener errorListener, Class<T> clazz) {
         super(method, url, body == null ? null : gson.toJson(body), listener, errorListener);
