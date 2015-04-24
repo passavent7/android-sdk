@@ -134,10 +134,10 @@ public class OkHttpClientTransport implements Transport {
     }
 
     public void perform(String url, Response.Listener<JSONObject> listener, Response.ErrorListener errorlistener) {
-        perform(Request.Method.GET, url, null, listener, errorlistener, false);
+        perform(Request.Method.GET, url, null, listener, errorlistener);
     }
-    public void perform(int method, String url, Object body, Response.Listener<JSONObject> listener, Response.ErrorListener errorlistener, boolean shouldAlwaysTryWithNetwork) {
-        perform(method, url, body, listener, errorlistener, JSONObject.class, Collections.EMPTY_MAP, shouldAlwaysTryWithNetwork);
+    public void perform(int method, String url, Object body, Response.Listener<JSONObject> listener, Response.ErrorListener errorlistener) {
+        perform(method, url, body, listener, errorlistener, JSONObject.class, Collections.EMPTY_MAP, false);
     }
 
     public <T> void perform(int method, String url, Object body, Response.Listener<T> listener, Response.ErrorListener errorlistener, Class<T> clazz, Map<String, String> headers, boolean shouldAlwaysTryWithNetwork) {
