@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/sensorberg-dev/android-sdk.svg?branch=master)](https://travis-ci.org/sensorberg-dev/android-sdk?branch=master)
 
 ##Warning:
-You are viewing the sources of the 1.0.0 **Release Candidate**. The SDK is not release as a fully supported, stable version. Feel free to explore it anyways.
+You are viewing the sources of the 1.0.0 **Release Candidate**. The SDK is not released as a fully supported, stable version. Feel free to explore it anyways.
 
 #Last stable release
 
@@ -9,7 +9,7 @@ Until 1.0.0 is released stable, please see the old [samples page](https://github
 
 #Integration
 
-For Integration instructions please visit out developer hub Android SDK page and [developer.sensorberg.com/android-sdk](https://developer.sensorberg.com/android-sdk)
+For Integration instructions please visit our developer hub Android SDK page and [developer.sensorberg.com/android-sdk](https://developer.sensorberg.com/android-sdk)
 
 #Build,Test,Deploy
 
