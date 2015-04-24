@@ -16,4 +16,5 @@ android {
     buildToolsVersion = project.ext.buildToolsVersion
 }
 
+apply from: '../uploadConf.gradle'
 apply from: '../bintrayUpload.gradle'

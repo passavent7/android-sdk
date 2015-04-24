@@ -36,4 +36,5 @@ dependencies {
     compile "com.google.code.gson:gson:2.3.1"
 }
 
+apply from: '../uploadConf.gradle'
 apply from: '../bintrayUpload.gradle'
