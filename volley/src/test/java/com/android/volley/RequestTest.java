@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.android.volley;
+package com.android.sensorbergVolley;
 
-import com.android.volley.Request.Priority;
+import com.android.sensorbergVolley.Request.Priority;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;

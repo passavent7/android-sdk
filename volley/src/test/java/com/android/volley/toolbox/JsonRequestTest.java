@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.android.volley.toolbox;
+package com.android.sensorbergVolley.toolbox;
 
-import com.android.volley.Response;
+import com.android.sensorbergVolley.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Test;

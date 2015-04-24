@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.volley.mock;
+package com.android.sensorbergVolley.mock;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.ResponseDelivery;
-import com.android.volley.VolleyError;
+import com.android.sensorbergVolley.Request;
+import com.android.sensorbergVolley.Response;
+import com.android.sensorbergVolley.ResponseDelivery;
+import com.android.sensorbergVolley.VolleyError;
 
 public class MockResponseDelivery implements ResponseDelivery {
 

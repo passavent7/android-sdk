@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.android.volley.mock;
+package com.android.sensorbergVolley.mock;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.toolbox.HttpStack;
+import com.android.sensorbergVolley.AuthFailureError;
+import com.android.sensorbergVolley.Request;
+import com.android.sensorbergVolley.toolbox.HttpStack;
 
 import org.apache.http.HttpResponse;
 

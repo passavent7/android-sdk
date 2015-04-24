@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.volley.toolbox;
+package com.android.sensorbergVolley.toolbox;
 
-import com.android.volley.Cache;
-import com.android.volley.toolbox.DiskBasedCache.CacheHeader;
+import com.android.sensorbergVolley.Cache;
+import com.android.sensorbergVolley.toolbox.DiskBasedCache.CacheHeader;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;

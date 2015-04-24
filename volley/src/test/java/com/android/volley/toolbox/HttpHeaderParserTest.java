@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.volley.toolbox;
+package com.android.sensorbergVolley.toolbox;
 
-import com.android.volley.Cache;
-import com.android.volley.NetworkResponse;
+import com.android.sensorbergVolley.Cache;
+import com.android.sensorbergVolley.NetworkResponse;
 
 import org.apache.http.Header;
 import org.apache.http.message.BasicHeader;

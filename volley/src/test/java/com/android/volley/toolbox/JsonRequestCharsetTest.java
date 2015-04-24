@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.volley.toolbox;
+package com.android.sensorbergVolley.toolbox;
 
-import com.android.volley.NetworkResponse;
-import com.android.volley.Response;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.sensorbergVolley.NetworkResponse;
+import com.android.sensorbergVolley.Response;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

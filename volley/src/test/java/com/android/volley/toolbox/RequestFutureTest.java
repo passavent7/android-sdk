@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.android.volley.toolbox;
+package com.android.sensorbergVolley.toolbox;
 
-import com.android.volley.Request;
+import com.android.sensorbergVolley.Request;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;

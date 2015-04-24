@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.volley.toolbox;
+package com.android.sensorbergVolley.toolbox;
 
 import android.graphics.Bitmap;
 import android.widget.ImageView;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
+import com.android.sensorbergVolley.Request;
+import com.android.sensorbergVolley.RequestQueue;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

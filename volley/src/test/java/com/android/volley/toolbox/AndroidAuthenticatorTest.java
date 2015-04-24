@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.volley.toolbox;
+package com.android.sensorbergVolley.toolbox;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -23,7 +23,7 @@ import android.accounts.AuthenticatorException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import com.android.volley.AuthFailureError;
+import com.android.sensorbergVolley.AuthFailureError;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;

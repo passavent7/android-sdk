@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.android.volley;
+package com.android.sensorbergVolley;
 
-import com.android.volley.mock.ShadowSystemClock;
-import com.android.volley.toolbox.NoCache;
-import com.android.volley.utils.ImmediateResponseDelivery;
+import com.android.sensorbergVolley.mock.ShadowSystemClock;
+import com.android.sensorbergVolley.toolbox.NoCache;
+import com.android.sensorbergVolley.utils.ImmediateResponseDelivery;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.volley;
+package com.android.sensorbergVolley;
 
-import com.android.volley.Request.Priority;
-import com.android.volley.RequestQueue.RequestFinishedListener;
-import com.android.volley.mock.MockRequest;
-import com.android.volley.mock.ShadowSystemClock;
-import com.android.volley.toolbox.NoCache;
-import com.android.volley.utils.ImmediateResponseDelivery;
+import com.android.sensorbergVolley.Request.Priority;
+import com.android.sensorbergVolley.RequestQueue.RequestFinishedListener;
+import com.android.sensorbergVolley.mock.MockRequest;
+import com.android.sensorbergVolley.mock.ShadowSystemClock;
+import com.android.sensorbergVolley.toolbox.NoCache;
+import com.android.sensorbergVolley.utils.ImmediateResponseDelivery;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,12 +30,6 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;

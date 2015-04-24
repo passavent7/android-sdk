@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.volley.mock;
+package com.android.sensorbergVolley.mock;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;

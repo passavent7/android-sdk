@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.android.volley.toolbox;
+package com.android.sensorbergVolley.toolbox;
 
-import com.android.volley.Request.Method;
-import com.android.volley.mock.TestRequest;
-import com.android.volley.toolbox.HttpClientStack.HttpPatch;
+import com.android.sensorbergVolley.Request.Method;
+import com.android.sensorbergVolley.mock.TestRequest;
+import com.android.sensorbergVolley.toolbox.HttpClientStack.HttpPatch;
 
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;

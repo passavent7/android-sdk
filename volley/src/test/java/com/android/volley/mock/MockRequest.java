@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.volley.mock;
+package com.android.sensorbergVolley.mock;
 
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.Response.ErrorListener;
-import com.android.volley.VolleyError;
-import com.android.volley.utils.CacheTestUtils;
+import com.android.sensorbergVolley.NetworkResponse;
+import com.android.sensorbergVolley.Request;
+import com.android.sensorbergVolley.Response;
+import com.android.sensorbergVolley.Response.ErrorListener;
+import com.android.sensorbergVolley.VolleyError;
+import com.android.sensorbergVolley.utils.CacheTestUtils;
 
 import java.util.HashMap;
 import java.util.Map;

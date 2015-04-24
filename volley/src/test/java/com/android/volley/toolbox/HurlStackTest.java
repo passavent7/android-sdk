@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.android.volley.toolbox;
+package com.android.sensorbergVolley.toolbox;
 
-import com.android.volley.Request.Method;
-import com.android.volley.mock.MockHttpURLConnection;
-import com.android.volley.mock.TestRequest;
+import com.android.sensorbergVolley.Request.Method;
+import com.android.sensorbergVolley.mock.MockHttpURLConnection;
+import com.android.sensorbergVolley.mock.TestRequest;
 
 import org.junit.Before;
 import org.junit.Test;

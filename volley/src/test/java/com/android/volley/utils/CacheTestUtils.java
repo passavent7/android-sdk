@@ -1,8 +1,8 @@
 // Copyright 2011 Google Inc. All Rights Reserved.
 
-package com.android.volley.utils;
+package com.android.sensorbergVolley.utils;
 
-import com.android.volley.Cache;
+import com.android.sensorbergVolley.Cache;
 
 import java.util.Random;
 

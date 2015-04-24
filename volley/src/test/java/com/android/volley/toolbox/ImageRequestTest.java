@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.volley.toolbox;
+package com.android.sensorbergVolley.toolbox;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-import com.android.volley.NetworkResponse;
-import com.android.volley.Response;
+import com.android.sensorbergVolley.NetworkResponse;
+import com.android.sensorbergVolley.Response;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;

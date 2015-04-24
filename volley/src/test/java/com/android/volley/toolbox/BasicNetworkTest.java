@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.volley.toolbox;
+package com.android.sensorbergVolley.toolbox;
 
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.mock.MockHttpStack;
+import com.android.sensorbergVolley.NetworkResponse;
+import com.android.sensorbergVolley.Request;
+import com.android.sensorbergVolley.Response;
+import com.android.sensorbergVolley.mock.MockHttpStack;
 
 import org.apache.http.ProtocolVersion;
 import org.apache.http.entity.StringEntity;

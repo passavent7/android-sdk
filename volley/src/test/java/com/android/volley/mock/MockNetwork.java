@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.android.volley.mock;
+package com.android.sensorbergVolley.mock;
 
-import com.android.volley.Network;
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.ServerError;
-import com.android.volley.VolleyError;
+import com.android.sensorbergVolley.Network;
+import com.android.sensorbergVolley.NetworkResponse;
+import com.android.sensorbergVolley.Request;
+import com.android.sensorbergVolley.ServerError;
+import com.android.sensorbergVolley.VolleyError;
 
 public class MockNetwork implements Network {
     public final static int ALWAYS_THROW_EXCEPTIONS = -1;

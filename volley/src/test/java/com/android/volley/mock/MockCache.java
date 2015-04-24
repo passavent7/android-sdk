@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.android.volley.mock;
+package com.android.sensorbergVolley.mock;
 
-import com.android.volley.Cache;
+import com.android.sensorbergVolley.Cache;
 
 public class MockCache implements Cache {
 

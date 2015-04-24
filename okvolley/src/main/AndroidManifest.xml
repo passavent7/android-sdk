@@ -3,7 +3,7 @@
     package="com.sensorberg.android.okvolley">
 
     <uses-sdk
-        tools:overrideLibrary="com.android.sensorbergVolley,com.android.volley"/>
+        tools:overrideLibrary="com.android.sensorbergVolley"/>
 
     <uses-permission android:name="android.permission.INTERNET" />
 

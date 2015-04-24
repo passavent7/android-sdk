@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.android.volley;
+package com.android.sensorbergVolley;
 
-import com.android.volley.mock.MockRequest;
-import com.android.volley.utils.CacheTestUtils;
-import com.android.volley.utils.ImmediateResponseDelivery;
+import com.android.sensorbergVolley.mock.MockRequest;
+import com.android.sensorbergVolley.utils.CacheTestUtils;
+import com.android.sensorbergVolley.utils.ImmediateResponseDelivery;
 
 import org.junit.After;
 import org.junit.Before;
