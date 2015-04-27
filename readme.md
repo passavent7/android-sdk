@@ -25,6 +25,19 @@ to see all the tasks.
 ```
 will run all the unit tests.
 
+If you wish to run the tests with your own resolver:
+
+set the system variable **RESOLVER_URL**
+
+```
+ 	export RESOLVER_URL=http://168.168.0.1:8080/layout
+```
+or pass **resolver_url** to the build script:
+
+```
+	./gradlew connectedAndroidTest -Presolver_url=http://168.168.0.1:8080/layout
+```
+
 #Licence
 -------
 
