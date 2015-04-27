@@ -2,6 +2,7 @@ package com.sensorberg.sdk.resolver;
 
 import android.test.AndroidTestCase;
 
+import com.sensorberg.sdk.BuildConfig;
 import com.sensorberg.sdk.internal.OkHttpClientTransport;
 import com.sensorberg.sdk.internal.URLFactory;
 import com.sensorberg.sdk.scanner.ScanEvent;

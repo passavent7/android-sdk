@@ -28,6 +28,8 @@ group = "com.sensorberg.sdk"
 archivesBaseName = 'android-sdk'
 version = "${project.ext.SDK_VERSION}${project.ext.RC_VERSION}"
 
+def resolverURL = System.getenv("RESOLVER_URL") ?: "$resolver_url" ?: null
+
 android {
     buildToolsVersion project.ext.buildToolsVersion
     compileSdkVersion project.ext.compileSdkVersion
@@ -38,7 +40,7 @@ android {
         targetSdkVersion project.ext.targetSdkVersion
         buildConfigField "String", "SDK_VERSION", "\"" + project.ext.SDK_VERSION + "\""
 
-		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+		testInstrumentationRunner "com.sensorberg.sdk.test.SensorbergTestRunner"
     }
     lintOptions {
         disable 'InvalidPackage', 'CommitPrefEdits', 'DefaultLocale'
@@ -64,6 +66,7 @@ android {
         debug {
             multiDexEnabled true
             testCoverageEnabled true;
+            buildConfigField "String", "RESOLVER_URL", resolverURL ? wrapInQuotes(resolverURL) : null
         }
         release {
             minifyEnabled false
@@ -107,6 +110,10 @@ uploadArchives {
             }
         }
     }
+}
+
+def wrapInQuotes(String wrapMe){
+    return "\"" + wrapMe + "\"";
 }
 
 
