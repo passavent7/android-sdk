@@ -13,6 +13,11 @@ For Integration instructions please visit our developer hub Android SDK page and
 
 #Build,Test,Deploy
 
+##Dependencies:
+* JDK 1.7
+* Android Support Repository
+* Build tools as stated in the build.gradle files
+
 This project is based on a standard Android Gradle setup. Run
 
 ```
