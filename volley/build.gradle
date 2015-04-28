@@ -5,6 +5,7 @@
 // Any other changes to the build config belong in rules.gradle, which
 // is used by projects that depend on Volley but define their own
 // tools versions across all dependencies to ensure a consistent build.
+apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.library'
 
 group = "com.sensorberg.android"
