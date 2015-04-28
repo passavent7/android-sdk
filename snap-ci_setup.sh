@@ -3,10 +3,7 @@
 set +e
 
 download-android
-echo y | android update sdk --no-ui --filter extra-android-support > /dev/null
-echo y | android update sdk --no-ui --filter extra-google-m2repository > /dev/null
-echo y | android update sdk --no-ui --filter android-18 > /dev/null
-echo y | android update sdk --no-ui --filter sys-img-armeabi-v7a-android-18 --all > /dev/null
+./install_android_dependencies.sh
 
 echo no | android create avd --force -n test -t android-18 --abi armeabi-v7a
 emulator -avd test -no-skin -no-audio -no-window &
