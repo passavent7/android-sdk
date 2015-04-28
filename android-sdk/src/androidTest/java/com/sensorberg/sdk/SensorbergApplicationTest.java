@@ -41,7 +41,9 @@ public abstract class SensorbergApplicationTest extends ApplicationTestCase<Appl
         if (server != null){
             server.shutdown();
         }
-        URLFactory.restorePreviousConf(previousConfiguration);
+        if (previousConfiguration != null) {
+            URLFactory.restorePreviousConf(previousConfiguration);
+        }
     }
 
     protected void startWebserver(int... rawRequestsResourceIds) throws IOException, JSONException {
