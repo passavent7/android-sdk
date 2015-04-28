@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/sensorberg-dev/android-sdk.svg?branch=master)](https://travis-ci.org/sensorberg-dev/android-sdk?branch=master)
+[![Build Status](https://snap-ci.com/sensorberg-dev/android-sdk/branch/master/build_image)](https://snap-ci.com/sensorberg-dev/android-sdk/branch/master)
 
 ##Warning:
 You are viewing the sources of the 1.0.0 **Release Candidate**. The SDK is not released as a fully supported, stable version. Feel free to explore it anyways.
@@ -15,8 +16,8 @@ For Integration instructions please visit our developer hub Android SDK page and
 
 ##Dependencies:
 * JDK 1.7
-* Android Support Repository
 * Build tools as stated in the build.gradle files
+* check the install_android_dependencies.sh file for a list of currently needed packages.
 
 This project is based on a standard Android Gradle setup. Run
 
