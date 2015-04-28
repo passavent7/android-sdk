@@ -22,6 +22,7 @@ import io.realm.Realm;
 
 public abstract class SensorbergApplicationTest extends ApplicationTestCase<Application> {
     protected MockWebServer server;
+    private URLFactory.Conf previousConfiguration;
 
     public SensorbergApplicationTest() {
         super(Application.class);
@@ -40,14 +41,14 @@ public abstract class SensorbergApplicationTest extends ApplicationTestCase<Appl
         if (server != null){
             server.shutdown();
         }
-        URLFactory.switchToProductionEnvironment();
+        URLFactory.restorePreviousConf(previousConfiguration);
     }
 
     protected void startWebserver(int... rawRequestsResourceIds) throws IOException, JSONException {
         server = new MockWebServer();
         enqueue(rawRequestsResourceIds);
         server.play();
-        URLFactory.switchToMockEnvironment(server.getUrl("/"));
+        previousConfiguration = URLFactory.switchToMockEnvironment(server.getUrl("/"));
     }
 
     protected java.net.URL getUrl(String path) {

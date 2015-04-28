@@ -6,6 +6,7 @@ import com.sensorberg.sdk.internal.AndroidPlatform;
 import com.sensorberg.sdk.internal.Clock;
 import com.sensorberg.sdk.internal.Platform;
 import com.sensorberg.sdk.resolver.ResolverListener;
+import com.sensorberg.sdk.settings.Settings;
 import com.squareup.okhttp.mockwebserver.MockResponse;
 import com.squareup.okhttp.mockwebserver.RecordedRequest;
 
@@ -36,7 +37,8 @@ public class TheBeaconActionHistoryPublisherIntegrationShould extends Sensorberg
             }
         });
 
-        tested = new BeaconActionHistoryPublisher(platform, ResolverListener.NONE, null);
+        Settings settings = new Settings(platform, platform.getSettingsSharedPrefs());
+        tested = new BeaconActionHistoryPublisher(platform, ResolverListener.NONE, settings);
 
         startWebserver();
         server.enqueue(new MockResponse().setBody("{}"));

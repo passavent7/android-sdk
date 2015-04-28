@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Build;
 
 import com.sensorberg.sdk.BuildConfig;
+import com.sensorberg.sdk.scanner.ScanHelper;
 
 import java.net.URL;
 
@@ -32,28 +33,36 @@ public class URLFactory {
         customResolverURL = PRODUCTION_RESOLVER_URL;
     }
 
-    public static void switchToStagingEnvironment(){
+    public static Conf switchToStagingEnvironment(){
+        Conf previousConf = new Conf(BASE_URL, SCHEME, customResolverURL);
         BASE_URL = STAGING_BASE_URL;
         SCHEME = "https";
         customResolverURL = STAGING_RESOLVER_URL;
+        return previousConf;
     }
 
-    public static void switchToTestEnvironment(){
+    public static Conf switchToTestEnvironment(){
+        Conf previousConf = new Conf(BASE_URL, SCHEME, customResolverURL);
         BASE_URL = TEST_BASE_URL;
         SCHEME = "https";
         customResolverURL = TEST_RESOLVER_URL;
+        return previousConf;
     }
 
-    public static void switchToBigbangEnvironment(){
+    public static Conf switchToBigbangEnvironment(){
+        Conf previousConf = new Conf(BASE_URL, SCHEME, customResolverURL);
         BASE_URL = BIGBANG_BASE_URL;
         SCHEME = "http";
         customResolverURL = BIGBANG_RESOLVER_URL;
+        return previousConf;
     }
 
-    public static void switchToMockEnvironment(URL url) {
+    public static Conf switchToMockEnvironment(URL url) {
+        Conf previousConf = new Conf(BASE_URL, SCHEME, customResolverURL);
         BASE_URL = url.getHost() + ":" +url.getPort();
         SCHEME = url.getProtocol();
         customResolverURL = null;
+        return previousConf;
     }
 
     private static Uri.Builder BaseUri() {
@@ -99,5 +108,23 @@ public class URLFactory {
             return;
         }
         customResolverURL = newResolverURL;
+    }
+
+    public static void restorePreviousConf(Conf previousConfiguration) {
+        BASE_URL = previousConfiguration.baseUrl;
+        SCHEME = previousConfiguration.scheme;
+        customResolverURL = previousConfiguration.customResolverURL;
+    }
+
+    public static class Conf {
+        private final String baseUrl;
+        private final String scheme;
+        private final String customResolverURL;
+
+        public Conf(String baseUrl, String scheme, String customResolverURL) {
+            this.baseUrl = baseUrl;
+            this.scheme = scheme;
+            this.customResolverURL = customResolverURL;
+        }
     }
 }
