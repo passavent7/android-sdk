@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/sensorberg-dev/android-sdk.svg?branch=master)](https://travis-ci.org/sensorberg-dev/android-sdk?branch=master)
-[![Build Status](https://snap-ci.com/sensorberg-dev/android-sdk/branch/master/build_image)](https://snap-ci.com/sensorberg-dev/android-sdk/branch/master)
 
 ##Warning:
 You are viewing the sources of the 1.0.0 **Release Candidate**. The SDK is not released as a fully supported, stable version. Feel free to explore it anyways.
