@@ -4,13 +4,17 @@ import android.util.Log;
 
 import com.android.sensorbergVolley.Network;
 import com.android.sensorbergVolley.VolleyError;
+import com.sensorberg.sdk.Constants;
 import com.sensorberg.sdk.SensorbergApplicationTest;
+import com.sensorberg.sdk.internal.transport.HistoryCallback;
 import com.sensorberg.sdk.model.BeaconId;
 import com.sensorberg.sdk.internal.BeaconResponseHandler;
 import com.sensorberg.sdk.internal.OkHttpClientTransport;
 import com.sensorberg.sdk.internal.Transport;
 import com.sensorberg.sdk.internal.transport.HeadersJsonObjectRequest;
 import com.sensorberg.sdk.internal.transport.SettingsCallback;
+import com.sensorberg.sdk.model.realm.RealmAction;
+import com.sensorberg.sdk.model.realm.RealmScan;
 import com.sensorberg.sdk.resolver.BeaconEvent;
 import com.sensorberg.sdk.resolver.ResolutionConfiguration;
 import com.sensorberg.sdk.scanner.ScanEvent;
@@ -21,10 +25,12 @@ import com.sensorberg.sdk.testUtils.TestPlatform;
 import org.fest.assertions.api.Assertions;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 
+import io.realm.Realm;
 import util.TestConstants;
 
 import static org.mockito.Matchers.any;
@@ -143,5 +149,38 @@ public class TransportShould extends SensorbergApplicationTest {
                 Assertions.assertThat(settings).isNotNull();
             }
         });
+    }
+
+    public void test_publish_data_to_the_server() throws Exception {
+        List<RealmScan> scans = new ArrayList<>();
+        List<RealmAction> actions = new ArrayList<>();
+
+        RealmScan scan1 = new RealmScan();
+        scan1.setCreatedAt(System.currentTimeMillis() - Constants.Time.ONE_HOUR);
+        scan1.setEntry(true);
+        scan1.setProximityUUID(TestConstants.ANY_BEACON_ID.getUuid().toString());
+        scan1.setProximityMajor(TestConstants.ANY_BEACON_ID.getMajorId());
+        scan1.setProximityMinor(TestConstants.ANY_BEACON_ID.getMinorId());
+        scan1.setEventTime(scan1.getCreatedAt());
+
+        scans.add(scan1);
+
+        tested.publishHistory(scans, actions, new HistoryCallback() {
+            @Override
+            public void onFailure(Throwable throwable) {
+                fail(throwable.getMessage());
+            }
+
+            @Override
+            public void onInstantActions(List<BeaconEvent> instantActions) {
+
+            }
+
+            @Override
+            public void onSuccess(List<RealmScan> scans, List<RealmAction> actions) {
+
+            }
+        });
+
     }
 }
