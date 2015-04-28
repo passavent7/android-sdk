@@ -2,6 +2,7 @@ package com.sensorberg.sdk.settings;
 
 import android.content.SharedPreferences;
 
+import com.android.sensorbergVolley.VolleyError;
 import com.sensorberg.sdk.Constants;
 import com.sensorberg.sdk.Logger;
 import com.sensorberg.sdk.internal.Platform;
@@ -134,7 +135,7 @@ public class Settings implements SettingsCallback {
     }
 
     @Override
-    public void onFailure(Throwable e) {
+    public void onFailure(VolleyError e) {
         Logger.log.logSettingsUpdateState("onFailure");
     }
 

@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 
-import io.realm.Realm;
 import util.TestConstants;
 
 import static org.mockito.Matchers.any;
@@ -38,6 +37,7 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static util.Utils.failWithVolleyError;
 
 public class TransportShould extends SensorbergApplicationTest {
 
@@ -89,7 +89,7 @@ public class TransportShould extends SensorbergApplicationTest {
             }
 
             @Override
-            public void onFailure(Throwable e) {
+            public void onFailure(VolleyError e) {
                 Log.d("FOO", "onFailure" + e.getLocalizedMessage());
             }
 
@@ -140,8 +140,8 @@ public class TransportShould extends SensorbergApplicationTest {
             }
 
             @Override
-            public void onFailure(Throwable e) {
-                fail("there was a failure with this request");
+            public void onFailure(VolleyError e) {
+                failWithVolleyError(e, "there was a failure with this request");
             }
 
             @Override
@@ -167,8 +167,8 @@ public class TransportShould extends SensorbergApplicationTest {
 
         tested.publishHistory(scans, actions, new HistoryCallback() {
             @Override
-            public void onFailure(Throwable throwable) {
-                fail(throwable.getMessage());
+            public void onFailure(VolleyError volleyError) {
+                failWithVolleyError(volleyError, "Request failed");
             }
 
             @Override

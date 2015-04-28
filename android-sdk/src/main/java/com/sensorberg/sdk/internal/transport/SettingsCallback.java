@@ -1,18 +1,20 @@
 package com.sensorberg.sdk.internal.transport;
 
+import com.android.sensorbergVolley.VolleyError;
+
 import org.json.JSONObject;
 
 import java.util.Map;
 
 public interface SettingsCallback {
-    final static SettingsCallback NONE = new SettingsCallback() {
+    SettingsCallback NONE = new SettingsCallback() {
         @Override
         public void nothingChanged() {
 
         }
 
         @Override
-        public void onFailure(Throwable e) {
+        public void onFailure(VolleyError e) {
 
         }
 
@@ -24,7 +26,7 @@ public interface SettingsCallback {
 
     void nothingChanged();
 
-    void onFailure(Throwable e);
+    void onFailure(VolleyError e);
 
     void onSettingsFound(JSONObject settings);
 }

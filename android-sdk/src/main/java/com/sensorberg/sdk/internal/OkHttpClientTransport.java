@@ -204,10 +204,10 @@ public class OkHttpClientTransport implements Transport {
                     try {
                         settingsCallback.onSettingsFound(response.getJSONObject("settings"));
                     } catch (JSONException e) {
-                        settingsCallback.onFailure(e);
+                        settingsCallback.onFailure(new VolleyError(e));
                     }
                 } else {
-                    settingsCallback.onFailure(new IllegalArgumentException("Server did not respond with success=true"));
+                    settingsCallback.onFailure(new VolleyError(new IllegalArgumentException("Server did not respond with success=true")));
                 }
             }
         };

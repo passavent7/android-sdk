@@ -3,6 +3,8 @@ package com.sensorberg.sdk.scanner;
 import android.content.Context;
 import android.os.Message;
 
+import com.android.sensorbergVolley.VolleyError;
+import com.sensorberg.sdk.Logger;
 import com.sensorberg.sdk.internal.Clock;
 import com.sensorberg.sdk.internal.Platform;
 import com.sensorberg.sdk.internal.RunLoop;
@@ -98,8 +100,8 @@ public class BeaconActionHistoryPublisher implements ScannerListener, RunLoop.Me
             }
 
             @Override
-            public void onFailure(Throwable throwable){
-
+            public void onFailure(VolleyError throwable){
+                Logger.log.logError("not able to publish history", throwable);
             }
 
             @Override

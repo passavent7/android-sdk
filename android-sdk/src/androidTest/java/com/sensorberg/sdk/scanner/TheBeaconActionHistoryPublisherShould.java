@@ -62,7 +62,7 @@ public class TheBeaconActionHistoryPublisherShould extends SensorbergApplication
 
     public void test_should_schedule_the_sending_of_one_the_unsent_objects() throws Exception {
         tested.publishHistory();
-
         verify(transport).publishHistory(hasSize(1), hasSize(1), any(HistoryCallback.class));
     }
+
 }
