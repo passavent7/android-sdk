@@ -21,6 +21,7 @@ import java.util.TimerTask;
 
 public abstract class AbstractScanner implements RunLoop.MessageHandlerCallback, Platform.ForegroundStateListener {
 
+    private static final long NEVER_STOPPED = 0L;
     protected final Platform platform;
 
     public long waitTime = Settings.DEFAULT_BACKGROUND_WAIT_TIME;
@@ -36,7 +37,7 @@ public abstract class AbstractScanner implements RunLoop.MessageHandlerCallback,
     private final Object enteredBeaconsMonitor = new Object();
     private final BeaconMap enteredBeacons;
     protected final RunLoop runLoop;
-    private long lastStopTimestamp = 0L; // this.platform.getClock().now(); // or 0L
+    private long lastStopTimestamp = NEVER_STOPPED; // this.platform.getClock().now(); // or 0L
 
     private long started;
     private boolean scanning;
@@ -142,8 +143,9 @@ public abstract class AbstractScanner implements RunLoop.MessageHandlerCallback,
             case ScannerEvent.LOGICAL_SCAN_START_REQUESTED: {
                 if (!scanning) {
                     lastExitCheckTimestamp = platform.getClock().now();
-                    if (lastExitCheckTimestamp - lastStopTimestamp > settings.getCleanBeaconMapRestartTimeout()) {
+                    if (lastStopTimestamp != NEVER_STOPPED && lastExitCheckTimestamp - lastStopTimestamp > settings.getCleanBeaconMapRestartTimeout()) {
                         clearCache();
+                        Logger.log.scannerStateChange("clearing the currently seen beacon, since we were turned off too long.");
                     }
                     started = platform.getClock().now();
                     scanning = true;

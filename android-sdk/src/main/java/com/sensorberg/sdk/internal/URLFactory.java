@@ -59,7 +59,7 @@ public class URLFactory {
 
     public static Conf switchToMockEnvironment(URL url) {
         Conf previousConf = new Conf(BASE_URL, SCHEME, customResolverURL);
-        BASE_URL = url.getHost() + ":" +url.getPort();
+        BASE_URL = url.getHost() + (url.getPort() != -1 ? ":" + url.getPort() : "");
         SCHEME = url.getProtocol();
         customResolverURL = null;
         return previousConf;
