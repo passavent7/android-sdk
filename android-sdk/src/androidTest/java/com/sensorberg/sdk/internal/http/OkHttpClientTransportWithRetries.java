@@ -1,8 +1,10 @@
 package com.sensorberg.sdk.internal.http;
 
 import com.android.sensorbergVolley.RequestQueue;
+import com.android.sensorbergVolley.VolleyError;
 import com.android.sensorbergVolley.toolbox.BasicNetwork;
 import com.android.sensorbergVolley.toolbox.DiskBasedCache;
+import com.android.sensorbergVolley.toolbox.Volley;
 import com.sensorberg.sdk.SensorbergApplicationTest;
 import com.sensorberg.sdk.internal.OkHttpClientTransport;
 import com.sensorberg.sdk.internal.Transport;
@@ -18,6 +20,7 @@ import util.TestConstants;
 
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+import static util.Utils.failWithVolleyError;
 
 public class OkHttpClientTransportWithRetries extends SensorbergApplicationTest {
 
@@ -49,8 +52,8 @@ public class OkHttpClientTransportWithRetries extends SensorbergApplicationTest 
             }
 
             @Override
-            public void onFailure(Throwable e) {
-                fail(e.getMessage());
+            public void onFailure(VolleyError e) {
+                failWithVolleyError(e, "failed to get settings");
             }
 
             @Override

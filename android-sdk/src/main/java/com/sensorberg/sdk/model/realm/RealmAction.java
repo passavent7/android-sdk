@@ -2,14 +2,12 @@ package com.sensorberg.sdk.model.realm;
 
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.sensorberg.sdk.Constants;
 import com.sensorberg.sdk.internal.Clock;
 import com.sensorberg.sdk.model.ISO8601TypeAdapter;
 import com.sensorberg.sdk.resolver.BeaconEvent;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -89,7 +87,7 @@ public class RealmAction extends RealmObject {
 
     public static RealmResults<RealmAction> notSentScans(Realm realm){
         RealmQuery<RealmAction> scans = realm.where(RealmAction.class)
-                .equalTo(RealmFields.Action.sentToServerTimestamp, RealmFields.ScanObject.NO_DATE);
+                .equalTo(RealmFields.Action.sentToServerTimestamp, RealmFields.Scan.NO_DATE);
         return scans.findAll();
     }
 

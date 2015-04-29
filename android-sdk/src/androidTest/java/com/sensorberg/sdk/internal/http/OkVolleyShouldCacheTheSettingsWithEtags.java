@@ -1,6 +1,7 @@
 package com.sensorberg.sdk.internal.http;
 
 import com.android.sensorbergVolley.RequestQueue;
+import com.android.sensorbergVolley.VolleyError;
 import com.android.sensorbergVolley.toolbox.BasicNetwork;
 import com.android.sensorbergVolley.toolbox.DiskBasedCache;
 import com.sensorberg.android.okvolley.OkHttpStack;
@@ -34,7 +35,7 @@ public class OkVolleyShouldCacheTheSettingsWithEtags extends SensorbergApplicati
         }
 
         @Override
-        public void onFailure(Throwable e) {
+        public void onFailure(VolleyError e) {
             //fail("this should not fail");
         }
 
