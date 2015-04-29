@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class RealmFields {
 
-    public interface ScanObject {
+    public interface Scan {
         String eventTime                = "eventTime";
         String hardwareAdress           = "hardwareAdress";
         String isEntry                  = "isEntry";

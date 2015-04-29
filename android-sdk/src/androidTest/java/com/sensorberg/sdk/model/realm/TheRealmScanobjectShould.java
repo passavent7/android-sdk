@@ -34,7 +34,7 @@ public class TheRealmScanobjectShould extends AndroidTestCase {
     }
 
     public void test_should_generate_a_bid() throws Exception {
-        Assertions.assertThat(tested.getBid()).isEqualToIgnoringCase("192E463C9B8E4590A23FD32007299EF50133701337");
+        Assertions.assertThat(tested.getPid()).isEqualToIgnoringCase("192E463C9B8E4590A23FD32007299EF50133701337");
     }
 
     public void test_should_be_json_serializeable() throws Exception {
@@ -43,7 +43,7 @@ public class TheRealmScanobjectShould extends AndroidTestCase {
 
         Assertions.assertThat(objectAsJSON)
                 .isNotEmpty()
-                .isEqualToIgnoringCase("{\"bid\":\"192e463c9b8e4590a23fd32007299ef50133701337\",\"trigger\":1,\"dt\":\"1970-01-01T00:00:00Z\"}");
+                .isEqualToIgnoringCase("{\"pid\":\"192e463c9b8e4590a23fd32007299ef50133701337\",\"trigger\":1,\"dt\":\"1970-01-01T00:00:00Z\"}");
 
     }
 
@@ -54,7 +54,7 @@ public class TheRealmScanobjectShould extends AndroidTestCase {
 
         Assertions.assertThat(objectsAsJson)
                 .isNotEmpty()
-                .isEqualToIgnoringCase("[{\"bid\":\"192e463c9b8e4590a23fd32007299ef50133701337\",\"trigger\":1,\"dt\":\"1970-01-01T00:00:00Z\"}]");
+                .isEqualToIgnoringCase("[{\"pid\":\"192e463c9b8e4590a23fd32007299ef50133701337\",\"trigger\":1,\"dt\":\"1970-01-01T00:00:00Z\"}]");
 
     }
 }

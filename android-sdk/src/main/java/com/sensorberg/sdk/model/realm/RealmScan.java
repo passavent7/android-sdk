@@ -32,7 +32,7 @@ public class RealmScan extends RealmObject {
         value.setProximityUUID(scanEvent.getBeaconId().getUuid().toString());
         value.setProximityMajor(scanEvent.getBeaconId().getMajorId());
         value.setProximityMinor(scanEvent.getBeaconId().getMinorId());
-        value.setSentToServerTimestamp(RealmFields.ScanObject.NO_DATE);
+        value.setSentToServerTimestamp(RealmFields.Scan.NO_DATE);
         value.setCreatedAt(now);
         return value;
     }
@@ -85,7 +85,7 @@ public class RealmScan extends RealmObject {
         this.sentToServerTimestamp = sentToServerTimestamp;
     }
 
-    public String getBid(){
+    public String getPid(){
         return this.getProximityUUID().replace("-", "") + String.format("%1$05d%2$05d", this.getProximityMajor() , this.getProximityMinor());
     }
 
@@ -105,7 +105,7 @@ public class RealmScan extends RealmObject {
 
     public static RealmResults<RealmScan> notSentScans(Realm realm){
         RealmQuery<RealmScan> scans = realm.where(RealmScan.class)
-                .equalTo(RealmFields.ScanObject.sentToServerTimestamp, RealmFields.ScanObject.NO_DATE);
+                .equalTo(RealmFields.Scan.sentToServerTimestamp, RealmFields.Scan.NO_DATE);
         return scans.findAll();
     }
 
@@ -130,8 +130,8 @@ public class RealmScan extends RealmObject {
 
     public static void removeAllOlderThan(Realm realm, long now, long cacheTtl) {
         RealmResults<?> actionsToDelete = realm.where(RealmScan.class)
-                .lessThan(RealmFields.ScanObject.createdAt, now - cacheTtl)
-                .not().equalTo(RealmFields.ScanObject.sentToServerTimestamp, RealmFields.Action.NO_DATE)
+                .lessThan(RealmFields.Scan.createdAt, now - cacheTtl)
+                .not().equalTo(RealmFields.Scan.sentToServerTimestamp, RealmFields.Action.NO_DATE)
                 .findAll();
 
         if (actionsToDelete.size() > 0){
@@ -152,7 +152,7 @@ public class RealmScan extends RealmObject {
         @Override
             public void write(JsonWriter out, RealmScan value) throws IOException {
                 out.beginObject();
-                out.name("bid").value(value.getBid());
+                out.name("pid").value(value.getPid());
                 out.name("trigger").value(value.getTrigger());
                 out.name("dt").value(iso8601Format.format(value.getEventTime()));
                 out.endObject();
