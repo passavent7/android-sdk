@@ -1,9 +1,15 @@
 package com.sensorberg.sdk.scanner;
 
+import android.support.test.runner.AndroidJUnit4;
 import android.test.AndroidTestCase;
 
 import com.sensorberg.sdk.settings.Settings;
 import com.sensorberg.sdk.testUtils.TestPlatform;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import util.Utils;
 
 import static com.sensorberg.sdk.testUtils.SensorbergMatcher.isEntryEvent;
@@ -14,19 +20,17 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 
-/**
- * Created by Burak on 01.10.2014.
- */
-public class TheBluetoothChangesShould extends AndroidTestCase {
+@RunWith(AndroidJUnit4.class)
+public class TheBluetoothChangesShould {
 
     Scanner tested;
     private TestPlatform platform;
     private long RANDOM_VALUE_THAT_IS_SHORTER_THAN_CLEAN_BEACONMAP_ON_RESTART_TIMEOUT_BUT_LONGER_THAN_EXIT_EVENT_DELAY = Utils.THIRTY_SECONDS;
     private Settings settings;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
+
         platform = new TestPlatform();
 
         settings = new Settings(platform, null);
@@ -37,12 +41,14 @@ public class TheBluetoothChangesShould extends AndroidTestCase {
         platform.clock.setNowInMillis(0);
     }
 
-    public void test_assert_random_values_are_within_range() {
+    @Test
+    public void assert_random_values_are_within_range() {
         assertThat(RANDOM_VALUE_THAT_IS_SHORTER_THAN_CLEAN_BEACONMAP_ON_RESTART_TIMEOUT_BUT_LONGER_THAN_EXIT_EVENT_DELAY).isLessThan(Settings.DEFAULT_CLEAN_BEACONMAP_ON_RESTART_TIMEOUT);
         assertThat(RANDOM_VALUE_THAT_IS_SHORTER_THAN_CLEAN_BEACONMAP_ON_RESTART_TIMEOUT_BUT_LONGER_THAN_EXIT_EVENT_DELAY).isGreaterThan(settings.getExitTimeout());
     }
 
-    public void test_still_sees_exit_events_when_bluetooth_is_restarted_in_a_short_interval() {
+    @Test
+    public void still_sees_exit_events_when_bluetooth_is_restarted_in_a_short_interval() {
         ScannerListener mockScannerListener = mock(ScannerListener.class);
         tested.addScannerListener(mockScannerListener);
         platform.fakeIBeaconSighting();
@@ -69,7 +75,8 @@ public class TheBluetoothChangesShould extends AndroidTestCase {
         verify(mockScannerListener, never()).onScanEventDetected(isEntryEvent());
     }
 
-    public void test_beacon_events_are_removed_when_bluetooth_is_restarted_after_a_long_break_interval() {
+
+    public void beacon_events_are_removed_when_bluetooth_is_restarted_after_a_long_break_interval() {
         ScannerListener mockScannerListener = mock(ScannerListener.class);
         tested.addScannerListener(mockScannerListener);
         platform.fakeIBeaconSighting();

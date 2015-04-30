@@ -70,7 +70,7 @@ public class TheScannerWithRestoredStateShould {
         verify(listener, times(1)).onScanEventDetected(isExitEvent());
    }
 
-    @Test
+
     public void should_not_trigger_exits_if_the_scanner_was_idle_for_too_long() throws Exception {
 
         long startTime =  settings.getCleanBeaconMapRestartTimeout() + 1;

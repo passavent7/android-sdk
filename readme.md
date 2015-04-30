@@ -52,7 +52,7 @@ paste your credentials in the **bintray.properties** file.
 run
 
 ``` bash
-	./gradlew clean android-sdk:bintrayUpload
+	./gradlew clean cAT android-sdk:bintrayUpload
 ```
 
 If you want to test the procedure, change the **dryRun** variable in the **bintrayUpload.gradle** file to *true* temporarely. The --info flag will give you details if you need them.
