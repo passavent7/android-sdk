@@ -43,6 +43,38 @@ or pass **resolver_url** to the build script:
 	./gradlew connectedAndroidTest -Presolver_url=http://168.168.0.1:8080/layout
 ```
 
+#Release
+
+Set your release name in the root **build.gradle**. If you want a regular release, leave the **project.ext.RC_VERSION** as an empty string.
+
+paste your credentials in the **bintray.properties** file.
+
+run
+
+``` bash
+	./gradlew clean android-sdk:bintrayUpload
+```
+
+If you want to test the procedure, change the **dryRun** variable in the **bintrayUpload.gradle** file to *true* temporarely. The --info flag will give you details if you need them.
+
+``` bash
+	./gradlew clean android-sdk:bintrayUpload --info
+	[...]
+	Version 'sensorberg/maven/android-sdk/1.0.0-SNAPSHOT' does not exist. Attempting to creating it...
+    (Dry run) Created verion 'sensorberg/maven/android-sdk/1.0.0-SNAPSHOT'.
+    Uploading to https://api.bintray.com/content/sensorberg/maven/android-sdk/1.0.0-SNAPSHOT/com/sensorberg/sdk/android-sdk/1.0.0-SNAPSHOT/android-sdk-1.0.0-SNAPSHOT-javadoc.jar...
+    (Dry run) Uploaded to 'https://api.bintray.com/content/sensorberg/maven/android-sdk/1.0.0-SNAPSHOT/com/sensorberg/sdk/android-sdk/1.0.0-SNAPSHOT/android-sdk-1.0.0-SNAPSHOT-javadoc.jar'.
+    Uploading to https://api.bintray.com/content/sensorberg/maven/android-sdk/1.0.0-SNAPSHOT/com/sensorberg/sdk/android-sdk/1.0.0-SNAPSHOT/android-sdk-1.0.0-SNAPSHOT-sources.jar...
+    (Dry run) Uploaded to 'https://api.bintray.com/content/sensorberg/maven/android-sdk/1.0.0-SNAPSHOT/com/sensorberg/sdk/android-sdk/1.0.0-SNAPSHOT/android-sdk-1.0.0-SNAPSHOT-sources.jar'.
+    Uploading to https://api.bintray.com/content/sensorberg/maven/android-sdk/1.0.0-SNAPSHOT/com/sensorberg/sdk/android-sdk/1.0.0-SNAPSHOT/android-sdk-1.0.0-SNAPSHOT.aar...
+    (Dry run) Uploaded to 'https://api.bintray.com/content/sensorberg/maven/android-sdk/1.0.0-SNAPSHOT/com/sensorberg/sdk/android-sdk/1.0.0-SNAPSHOT/android-sdk-1.0.0-SNAPSHOT.aar'.
+    Uploading to https://api.bintray.com/content/sensorberg/maven/android-sdk/1.0.0-SNAPSHOT/com/sensorberg/sdk/android-sdk/1.0.0-SNAPSHOT/android-sdk-1.0.0-SNAPSHOT.pom...
+    (Dry run) Uploaded to 'https://api.bintray.com/content/sensorberg/maven/android-sdk/1.0.0-SNAPSHOT/com/sensorberg/sdk/android-sdk/1.0.0-SNAPSHOT/android-sdk-1.0.0-SNAPSHOT.pom'.
+    (Dry run) Pulished verion 'sensorberg/maven/android-sdk/1.0.0-SNAPSHOT'.
+    :android-sdk:bintrayUpload (Thread[Daemon worker Thread 2,5,main]) completed. Took 1.708 secs.
+
+```
+
 #Licence
 -------
 
