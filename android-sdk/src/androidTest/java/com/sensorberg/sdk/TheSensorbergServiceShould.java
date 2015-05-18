@@ -36,8 +36,6 @@ public class TheSensorbergServiceShould extends AndroidTestCase {
     public void setUp() throws Exception {
         super.setUp();
 
-        System.setProperty("dexmaker.dexcache", getContext().getCacheDir().getPath());
-
         testPlatform = spy(new TestPlatform());
         testPlatform.setContext(getContext());
         {

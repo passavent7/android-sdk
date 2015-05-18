@@ -26,7 +26,6 @@ public class TheIntentSchedulingBeUpdateable extends AndroidTestCase {
     public void setUp() throws Exception {
 
         super.setUp();
-        System.setProperty("dexmaker.dexcache", getContext().getCacheDir().getPath());
         tested = new AndroidPlatform(getContext());
         Settings mockSettings = mock(Settings.class);
         when(mockSettings.getMessageDelayWindowLength()).thenReturn(Constants.Time.ONE_SECOND / 10);

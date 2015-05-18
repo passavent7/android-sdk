@@ -31,7 +31,6 @@ public class TheResolverShould extends AndroidTestCase{
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        System.setProperty("dexmaker.dexcache", getContext().getCacheDir().getPath());
         URLFactory.switchToProductionEnvironment();
 
         ResolverConfiguration resolverConfiguration = new ResolverConfiguration();

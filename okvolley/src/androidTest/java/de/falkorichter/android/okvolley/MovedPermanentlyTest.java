@@ -35,8 +35,6 @@ public class MovedPermanentlyTest extends ApplicationTestCase<Application> {
     protected void setUp() throws Exception {
         createApplication();
 
-        System.setProperty("dexmaker.dexcache", getApplication().getCacheDir().getPath());
-
         tested = OkVolley.newRequestQueue(getContext(), false);
 
         server = new MockWebServer();

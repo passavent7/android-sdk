@@ -17,7 +17,6 @@ public class TheScannerWithTimeoutsShould extends TheDefaultScannerSetupShould{
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        System.setProperty("dexmaker.dexcache", getContext().getCacheDir().getPath());
 
         plattform.clock.setNowInMillis(0);
 

@@ -46,8 +46,6 @@ public class OkVolleyShouldCacheTheSettings extends ApplicationTestCase<Applicat
     protected void setUp() throws Exception {
         createApplication();
 
-        System.setProperty("dexmaker.dexcache", getApplication().getCacheDir().getPath());
-
         testPlattform = spy(new TestPlatform().setContext(getApplication()));
 
         stack = spy(new OkHttpStack());
