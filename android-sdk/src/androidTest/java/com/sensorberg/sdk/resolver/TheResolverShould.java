@@ -31,7 +31,6 @@ public class TheResolverShould extends AndroidTestCase{
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        URLFactory.switchToProductionEnvironment();
 
         ResolverConfiguration resolverConfiguration = new ResolverConfiguration();
         TestPlatform androidPlattform = spy(new TestPlatform());
@@ -66,6 +65,10 @@ public class TheResolverShould extends AndroidTestCase{
      * https://manage.sensorberg.com/#/campaign/edit/5dc7f22f-dbcf-4065-8b28-e81b0149fcc8
      * https://manage.sensorberg.com/#/campaign/edit/292ba508-226e-41c3-aac7-969fa712c435
      *
+     * https://staging-manage.sensorberg.com/#/campaign/edit/be0c8822-937c-49ee-9890-13fb8ecbad05
+     * https://staging-manage.sensorberg.com/#/campaign/edit/01fc187b-de29-4b87-b04c-32cdf60d4270
+     * https://staging-manage.sensorberg.com/#/campaign/edit/ed464330-ea1b-4132-a993-d81796871587
+     *
      */
 
     public void test_resolve_in_app_function() throws Exception {
@@ -93,6 +96,11 @@ public class TheResolverShould extends AndroidTestCase{
 
     }
 
+    /**
+     *  https://manage.sensorberg.com/#/campaign/edit/6edd5ff0-d63a-4968-b7fa-b448d1c3a0e9
+     *
+     *  https://staging-manage.sensorberg.com/#/campaign/edit/be0c8822-937c-49ee-9890-13fb8ecbad05
+     */
     public void test_beacon_with_delay() throws Exception {
 
         ResolverListener mockListener = mock(ResolverListener.class);
