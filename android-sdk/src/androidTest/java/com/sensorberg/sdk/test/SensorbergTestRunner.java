@@ -14,6 +14,5 @@ public class SensorbergTestRunner extends android.support.test.runner.AndroidJUn
         if (com.sensorberg.sdk.BuildConfig.RESOLVER_URL != null) {
             URLFactory.setLayoutURL(com.sensorberg.sdk.BuildConfig.RESOLVER_URL);
         }
-        URLFactory.setLayoutURL("https://staging-resolver.sensorberg.com/layout");
     }
 }
