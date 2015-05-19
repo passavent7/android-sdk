@@ -79,7 +79,11 @@ public class OkHttpClientTransport implements Transport {
         Response.Listener<BaseResolveResponse> listener = new Response.Listener<BaseResolveResponse>() {
             @Override
             public void onResponse(BaseResolveResponse response) {
-                proximityUUIDUpdateHandler.proximityUUIDListUpdated(response.getAccountProximityUUIDs());
+                if ( response != null ) {
+                    proximityUUIDUpdateHandler.proximityUUIDListUpdated(response.getAccountProximityUUIDs());
+                } else {
+                    proximityUUIDUpdateHandler.proximityUUIDListUpdated(Collections.EMPTY_LIST);
+                }
             }
         };
         perform(Request.Method.GET, getResolveURLString(), null, listener, Response.ErrorListener.NONE, BaseResolveResponse.class, Collections.EMPTY_MAP, true);
