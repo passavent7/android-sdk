@@ -1,5 +1,6 @@
 package com.sensorberg.sdk.model.realm;
 
+import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.sensorberg.sdk.model.ISO8601TypeAdapter;
@@ -8,6 +9,7 @@ import com.sensorberg.sdk.scanner.ScanEventType;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.Date;
 import java.util.List;
 
 import io.realm.Realm;
@@ -143,18 +145,15 @@ public class RealmScan extends RealmObject {
         }
     }
 
-    public static class RealmScanObjectTypeAdapter extends ISO8601TypeAdapter<RealmScan> {
-
-        public RealmScanObjectTypeAdapter(String dateFormatString) {
-            super(dateFormatString);
-        }
+    public static class RealmScanObjectTypeAdapter extends TypeAdapter<RealmScan> {
 
         @Override
             public void write(JsonWriter out, RealmScan value) throws IOException {
                 out.beginObject();
                 out.name("pid").value(value.getPid());
                 out.name("trigger").value(value.getTrigger());
-                out.name("dt").value(iso8601Format.format(value.getEventTime()));
+                out.name("dt");
+                ISO8601TypeAdapter.DATE_ADAPTER.write(out, new Date(value.getEventTime()));
                 out.endObject();
             }
 

@@ -24,6 +24,8 @@ import com.sensorberg.sdk.resolver.BeaconEvent;
 import com.sensorberg.sdk.resolver.ResolutionConfiguration;
 import com.sensorberg.sdk.resolver.ResolverConfiguration;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import java.net.URL;
 import java.util.HashSet;
 import java.util.List;
@@ -139,7 +141,7 @@ public class SensorbergService extends Service {
         if (resolverURL != null) {
             URLFactory.setLayoutURL(resolverURL);
         }
-
+        JodaTimeAndroid.init(this);
     }
 
     @Override

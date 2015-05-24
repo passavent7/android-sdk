@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import com.sensorberg.sdk.internal.URLFactory;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import org.junit.Before;
 
 public class SensorbergTestRunner extends android.support.test.runner.AndroidJUnitRunner {
@@ -16,5 +18,6 @@ public class SensorbergTestRunner extends android.support.test.runner.AndroidJUn
         if (com.sensorberg.sdk.BuildConfig.RESOLVER_URL != null) {
             URLFactory.setLayoutURL(com.sensorberg.sdk.BuildConfig.RESOLVER_URL);
         }
+        JodaTimeAndroid.init(getContext());
     }
 }

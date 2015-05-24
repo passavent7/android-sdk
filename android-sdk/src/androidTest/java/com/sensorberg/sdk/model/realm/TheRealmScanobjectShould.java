@@ -43,7 +43,7 @@ public class TheRealmScanobjectShould extends AndroidTestCase {
 
         Assertions.assertThat(objectAsJSON)
                 .isNotEmpty()
-                .isEqualToIgnoringCase("{\"pid\":\"192e463c9b8e4590a23fd32007299ef50133701337\",\"trigger\":1,\"dt\":\"1970-01-01T00:00:00Z\"}");
+                .isEqualToIgnoringCase("{\"pid\":\"192e463c9b8e4590a23fd32007299ef50133701337\",\"trigger\":1,\"dt\":\"1969-12-31T19:00:00.100-05:00\"}");
 
     }
 
@@ -54,7 +54,7 @@ public class TheRealmScanobjectShould extends AndroidTestCase {
 
         Assertions.assertThat(objectsAsJson)
                 .isNotEmpty()
-                .isEqualToIgnoringCase("[{\"pid\":\"192e463c9b8e4590a23fd32007299ef50133701337\",\"trigger\":1,\"dt\":\"1970-01-01T00:00:00Z\"}]");
+                .isEqualToIgnoringCase("[{\"pid\":\"192e463c9b8e4590a23fd32007299ef50133701337\",\"trigger\":1,\"dt\":\"1969-12-31T19:00:00.100-05:00\"}]");
 
     }
 }

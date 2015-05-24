@@ -10,14 +10,17 @@ import com.android.sensorbergVolley.toolbox.JsonRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
+import com.sensorberg.sdk.model.ISO8601TypeAdapter;
 import com.sensorberg.sdk.model.realm.RealmAction;
 import com.sensorberg.sdk.model.realm.RealmScan;
 
 import org.apache.http.HttpStatus;
+import org.joda.time.format.ISODateTimeFormat;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.Map;
 
 public class HeadersJsonObjectRequest<T> extends JsonRequest<T> {
@@ -29,11 +32,11 @@ public class HeadersJsonObjectRequest<T> extends JsonRequest<T> {
     private static String dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 
     public static Gson gson = new GsonBuilder()
-            .setDateFormat(dateFormat)
-            .registerTypeAdapter(RealmScan.ADAPTER_TYPE(), new RealmScan.RealmScanObjectTypeAdapter(dateFormat))
-            .registerTypeAdapter(RealmScan.class, new RealmScan.RealmScanObjectTypeAdapter(dateFormat))
-            .registerTypeAdapter(RealmAction.ADAPTER_TYPE(), new RealmAction.RealmActionTypeAdapter(dateFormat))
-            .registerTypeAdapter(RealmAction.class, new RealmAction.RealmActionTypeAdapter(dateFormat))
+            .registerTypeAdapter(Date.class, ISO8601TypeAdapter.DATE_ADAPTER)
+            .registerTypeAdapter(RealmScan.ADAPTER_TYPE(), new RealmScan.RealmScanObjectTypeAdapter())
+            .registerTypeAdapter(RealmScan.class, new RealmScan.RealmScanObjectTypeAdapter())
+            .registerTypeAdapter(RealmAction.ADAPTER_TYPE(), new RealmAction.RealmActionTypeAdapter())
+            .registerTypeAdapter(RealmAction.class, new RealmAction.RealmActionTypeAdapter())
             .registerTypeAdapter(JSONObject.class, new JSONObjectTyeAdapter())
             .create();
 
