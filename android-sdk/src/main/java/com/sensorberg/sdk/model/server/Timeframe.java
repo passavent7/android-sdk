@@ -2,7 +2,7 @@ package com.sensorberg.sdk.model.server;
 
 import java.util.Date;
 
-public class TimeFrame {
+public class Timeframe {
     /**
      * can be null, if so, only the end is important.
      */
@@ -12,7 +12,7 @@ public class TimeFrame {
      */
     public Date end;
 
-    public TimeFrame(Long startMillis, Long endMillis) {
+    public Timeframe(Long startMillis, Long endMillis) {
         if(startMillis != null){
             start = new Date(startMillis);
         }

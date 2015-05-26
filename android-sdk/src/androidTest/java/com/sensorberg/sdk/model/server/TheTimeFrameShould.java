@@ -11,7 +11,7 @@ public class TheTimeFrameShould {
 
     @Test
     public void be_valid_when_start_time_is_null() throws Exception {
-        TimeFrame tested = new TimeFrame(null, 1000L);
+        Timeframe tested = new Timeframe(null, 1000L);
 
         Assertions.assertThat(tested.valid(1)).isTrue();
         Assertions.assertThat(tested.valid(1000)).isTrue();
@@ -21,7 +21,7 @@ public class TheTimeFrameShould {
 
     @Test
     public void be_valid_when_end_time_is_null() throws Exception {
-        TimeFrame tested = new TimeFrame(1000L, null);
+        Timeframe tested = new Timeframe(1000L, null);
 
         Assertions.assertThat(tested.valid(1)).isFalse();
         Assertions.assertThat(tested.valid(1000)).isTrue();
@@ -31,7 +31,7 @@ public class TheTimeFrameShould {
 
     @Test
     public void answer_correctly_with_both_values() throws Exception {
-        TimeFrame tested = new TimeFrame(0L, 1000L);
+        Timeframe tested = new Timeframe(0L, 1000L);
 
         Assertions.assertThat(tested.valid(-1)).isFalse();
         Assertions.assertThat(tested.valid(1)).isTrue();

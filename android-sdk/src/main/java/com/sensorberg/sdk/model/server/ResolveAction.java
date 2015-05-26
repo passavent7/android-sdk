@@ -51,7 +51,7 @@ public class ResolveAction implements Serializable{
     public long delay;
     public boolean reportImmediately;
     public JSONObject content;
-    public List<TimeFrame> timeFrames;
+    public List<Timeframe> timeframes;
     public Date deliverAt;
 
     public ResolveAction(String uuid, int trigger, int type, String name, List<String> beacons, long suppressionTime, long delay, boolean reportImmediately, JSONObject content, Date deliverAt) {
@@ -111,11 +111,11 @@ public class ResolveAction implements Serializable{
     }
 
     public boolean isValidNow(long now) {
-        if (timeFrames == null || timeFrames.isEmpty()){
+        if (timeframes == null || timeframes.isEmpty()){
             return true;
         }
-        for (TimeFrame timeFrame : timeFrames) {
-            boolean valid = timeFrame.valid(now);
+        for (Timeframe timeframe : timeframes) {
+            boolean valid = timeframe.valid(now);
             if (valid) return true;
         }
         return false;

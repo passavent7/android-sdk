@@ -23,6 +23,7 @@ import com.sensorberg.sdk.settings.Settings;
 import com.sensorberg.sdk.testUtils.TestPlatform;
 
 import org.fest.assertions.api.Assertions;
+import org.joda.time.DateTime;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -54,6 +55,7 @@ public class TransportShould extends SensorbergApplicationTest {
     public void setUp() throws Exception {
         super.setUp();
         testPlattform = spy(new TestPlatform().setContext(getApplication()));
+        testPlattform.clock.setNowInMillis(new DateTime(2015, 5, 1, 1, 1, 1).getMillis());
 
         scanEvent = new ScanEvent.Builder()
                 .withBeaconId(new BeaconId(BEACON_ID, MAJOR, MINOR))

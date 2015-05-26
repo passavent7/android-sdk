@@ -12,6 +12,7 @@ import com.sensorberg.sdk.testUtils.TestPlatform;
 import org.fest.assertions.api.Assertions;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
+import org.joda.time.DateTime;
 
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class TheResolverShould extends AndroidTestCase{
         androidPlattform.setContext(getContext());
         androidPlattform.setTransport(new OkHttpClientTransport(androidPlattform, null));
         androidPlattform.getTransport().setApiToken(TestConstants.API_TOKEN);
+        androidPlattform.clock.setNowInMillis(new DateTime(2015, 5, 1, 1, 1, 1).getMillis());
 
         testedWithFakeBackend = new Resolver(resolverConfiguration, androidPlattform);
         ResolverConfiguration realConfiguration = new ResolverConfiguration();
