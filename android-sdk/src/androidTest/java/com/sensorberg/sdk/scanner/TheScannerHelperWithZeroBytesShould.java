@@ -52,6 +52,13 @@ public class TheScannerHelperWithZeroBytesShould extends AndroidTestCase {
     }
 
     @Test
+    public void find_a_beacon_with_estimote_sticker_specific_advertisement_packet() {
+        Pair<BeaconId, Integer> beacon = ScanHelper.getBeaconID(wrapWithZeroBytes(TestPlatform.BYTES_FOR_ESTIMOTE_STICKER_BEACON, 62));
+        Assertions.assertThat(beacon.first).isEqualTo(TestPlatform.EXPECTED_ESTIMOTE_ID);
+        Assertions.assertThat(beacon.second).isEqualTo(-58);
+    }
+
+    @Test
     public void find_a_beacon_with_another_variation_in_advertisement_packet() {
         Pair<BeaconId, Integer> beacon = ScanHelper.getBeaconID(wrapWithZeroBytes(TestPlatform.BYTES_FOR_BEACON_WITH_DIFFERENT_FLAGS_2, 62));
         Assertions.assertThat(beacon.first).isEqualTo(TestPlatform.EXPECTED_ALIEN_1);

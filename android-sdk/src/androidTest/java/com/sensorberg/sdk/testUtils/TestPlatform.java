@@ -49,6 +49,7 @@ public class TestPlatform implements Platform {
 
     public static final String ADVERTISEMENT_DATA_FLAGS = "020106";
     public static final String ADVERTISEMENT_DATA_FLAGS_ANDROID_NEXUS_9 = "020102";
+    public static final String ADVERTISEMENT_DATA_FLAGS_ESTIMOTE_STICKERS = "020104";
     public static final String DIFFERENT_ADVERTISEMENT_DATA_FLAGS_1 = "029419";
     public static final String DIFFERENT_ADVERTISEMENT_DATA_FLAGS_2 = "02011a";
     public static final String INVALID_ADVERTISEMENT_DATA_FLAGS = "02FFFF";
@@ -63,10 +64,14 @@ public class TestPlatform implements Platform {
 
     public static final String SENSORBERG_PROXIMITY_UUID_0 = "7367672374000000FFFF0000FFFF0000";
     public static final String ALIEN_PROXIMITY_UUID = "08077023A6C343FB91FA4EE34D8782E8";
+    public static final String ESTIMOTE_STICKER_PROXIMITY_UUID = "2A8136699373D057C85E4D8F4AF794A9";
     public static final String MAJOR_ID = "0111"; //DEC: 273
     public static final String MINOR_ID = "0111"; //DEC: 273
+
     public static final String BEACON_ID_1 = SENSORBERG_PROXIMITY_UUID_0 + MAJOR_ID + MINOR_ID;
     public static final String ALIEN_ID_1 = ALIEN_PROXIMITY_UUID + MAJOR_ID + MINOR_ID;
+    public static final String ESTIMOTE_ID = ESTIMOTE_STICKER_PROXIMITY_UUID + MAJOR_ID + MINOR_ID;
+
     public static final String CALIBRATED_TX_VALUE = "C6"; //DEC: -58
     public static final String ACCENT_SYSTEMS_IBEACON_FOOTER_WITH_BATTERY_STATUS = "42"; //66%
     public static final String ALT_BEACON_FOOTER = "23"; //Manufacturer specific (Alt beacon Spec)
@@ -75,7 +80,6 @@ public class TestPlatform implements Platform {
     public static final byte[] BYTES_FOR_BEACON_1 = hexStringToByteArray( ADVERTISEMENT_DATA_FLAGS + IBEACON_HEADER + BEACON_ID_1 + CALIBRATED_TX_VALUE );
 
     public static final byte[] BYTES_FOR_SENSORBERG_BEACON_1 = hexStringToByteArray( ADVERTISEMENT_DATA_FLAGS + IBEACON_HEADER + BEACON_ID_1 + CALIBRATED_TX_VALUE );
-
     public static final byte[] BYTES_FOR_ALIEN_BEACON_1 = hexStringToByteArray( ADVERTISEMENT_DATA_FLAGS + IBEACON_HEADER + ALIEN_ID_1 + CALIBRATED_TX_VALUE );
 
     public static final byte[] BYTES_FOR_BEACON_WITHOUT_FLAGS = hexStringToByteArray( IBEACON_HEADER + ALIEN_ID_1 + CALIBRATED_TX_VALUE );
@@ -83,6 +87,7 @@ public class TestPlatform implements Platform {
     public static final byte[] BYTES_FOR_BEACON_WITH_DIFFERENT_FLAGS_1 = hexStringToByteArray( DIFFERENT_ADVERTISEMENT_DATA_FLAGS_1 + IBEACON_HEADER + ALIEN_ID_1 + CALIBRATED_TX_VALUE );
     public static final byte[] BYTES_FOR_BEACON_WITH_DIFFERENT_FLAGS_2 = hexStringToByteArray( DIFFERENT_ADVERTISEMENT_DATA_FLAGS_2 + IBEACON_HEADER + ALIEN_ID_1 + CALIBRATED_TX_VALUE );
     public static final byte[] BYTES_FOR_BEACON_WITH_NEXUS9_FLAGS = hexStringToByteArray( ADVERTISEMENT_DATA_FLAGS_ANDROID_NEXUS_9 + IBEACON_HEADER + ALIEN_ID_1 + CALIBRATED_TX_VALUE );
+    public static final byte[] BYTES_FOR_ESTIMOTE_STICKER_BEACON = hexStringToByteArray( ADVERTISEMENT_DATA_FLAGS_ESTIMOTE_STICKERS + IBEACON_HEADER + ESTIMOTE_ID + CALIBRATED_TX_VALUE );
 
     public static final byte[] BYTES_FOR_BEACON_WITH_ABSTRUSE_VARIATION_1 = hexStringToByteArray( LONGER_ADVERTISEMENT_DATA_FLAGS + IBEACON_HEADER + ALIEN_ID_1 + CALIBRATED_TX_VALUE );
     public static final byte[] BYTES_FOR_BEACON_WITH_ABSTRUSE_VARIATION_2 = hexStringToByteArray( SHORTER_ADVERTISEMENT_DATA_FLAGS + IBEACON_HEADER + ALIEN_ID_1 + CALIBRATED_TX_VALUE );
@@ -104,6 +109,7 @@ public class TestPlatform implements Platform {
 
     public static final BeaconId EXPECTED_BEACON_1 = new BeaconId(Utils.hexStringToByteArray(BEACON_ID_1));
     public static final BeaconId EXPECTED_ALIEN_1 = new BeaconId(Utils.hexStringToByteArray(ALIEN_ID_1));
+    public static final BeaconId EXPECTED_ESTIMOTE_ID = new BeaconId(Utils.hexStringToByteArray(ESTIMOTE_ID));
 
     public CustomClock clock = new CustomClock();
     private BluetoothAdapter.LeScanCallback scanCallback;
