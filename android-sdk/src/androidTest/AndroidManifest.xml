@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sensorberg.sdk">
 
-    <application>
+    <application
+        android:name="android.support.multidex.MultiDexApplication">
         <receiver android:name="com.sensorberg.sdk.internal.TestGenericBroadcastReceiver"
             android:enabled="true"/>
 
