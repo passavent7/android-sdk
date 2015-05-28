@@ -1,6 +1,8 @@
 package com.sensorberg.sdk.resolver;
 
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.net.URL;
 
@@ -9,11 +11,13 @@ import java.net.URL;
  */
 public final class ResolverConfiguration implements Serializable {
 
-    static final long serialVersionUID = 2L;
+    static final long serialVersionUID = 3L;
 
     public String apiToken;
 
     private URL resolverLayoutURL;
+
+    private JSONObject payload;
 
     /**
      * Sets the API token of the {@link ResolverConfiguration}.
@@ -32,5 +36,15 @@ public final class ResolverConfiguration implements Serializable {
 
     public void setResolverLayoutURL(URL resolverLayoutURL) {
         this.resolverLayoutURL = resolverLayoutURL;
+    }
+
+    public JSONObject getPayload() {
+        return payload;
+    }
+
+    public boolean setPayload(JSONObject payload) {
+        boolean changed = this.payload != null && !this.payload.equals(payload);
+        this.payload = payload;
+        return changed;
     }
 }

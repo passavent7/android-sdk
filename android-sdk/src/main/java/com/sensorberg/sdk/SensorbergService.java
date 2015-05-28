@@ -26,6 +26,9 @@ import com.sensorberg.sdk.resolver.ResolverConfiguration;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.net.URL;
 import java.util.HashSet;
 import java.util.List;
@@ -61,12 +64,15 @@ public class SensorbergService extends Service {
     public static final int MSG_TYPE_DISABLE_LOGGING                = 103;
     public static final int MSG_TYPE_ENABLE_LOGGING                 = 104;
     public static final int MSG_TYPE_SET_RESOLVER_ENDPOINT          = 105;
+    public static final int MSG_TYPE_SET_PAYLOAD                    = 106;
 
 
     public static final String MSG_SET_API_TOKEN_TOKEN = "com.sensorberg.android.sdk.message.setApiToken.apiTokenString";
-    public static final String MSG_SET_RESOLVER_ENDPOINT_ENDPOINT_URL = "com.sensorberg.android.sdk.intent.recolverEndpoint";
+    public static final String MSG_SET_RESOLVER_ENDPOINT_ENDPOINT_URL = "com.sensorberg.android.sdk.intent.resolverEndpoint";
+    public static final String MSG_TYPE_SET_PAYLOAD_PAYLOAD = "com.sensorberg.android.sdk.message.setPayload.payload";
     public static final String MSG_PRESENT_ACTION_BEACONEVENT = "com.sensorberg.android.sdk.message.presentBeaconEvent.beaconEvent";
     public static final String SERVICE_CONFIGURATION = "serviceConfiguration";
+
 
 
 
@@ -111,6 +117,8 @@ public class SensorbergService extends Service {
                     return "MSG_BEACON_LAYOUT_UPDATE";
                 case MSG_TYPE_SET_RESOLVER_ENDPOINT:
                     return "MSG_TYPE_SET_RESOLVER_ENDPOINT";
+                case MSG_TYPE_SET_PAYLOAD:
+                    return "MSG_TYPE_SET_PAYLOAD";
                 default:
                     return "unknown message" + what;
             }
@@ -169,7 +177,7 @@ public class SensorbergService extends Service {
 
             handleDebuggingIntent(intent, this);
 
-            if (handleIntentEvenIfNoBootstrapperPresent(intent)){
+            if (shouldShutdownService(intent)){
                 stopSelf();
                 return START_NOT_STICKY;
             }
@@ -185,13 +193,18 @@ public class SensorbergService extends Service {
                     if (isEmpty(apiKey)){
                         apiKey = ManifestParser.get(META_DATA_API_KEY, this);
                     }
-
                     if (!isEmpty(apiKey)) {
+
+                        platform.getTransport().setApiToken(apiKey);
+
+                    }
+                    if (platform.getTransport().getApiToken() != null){
                         bootstrapper = new InternalApplicationBootstrapper(platform);
-                        bootstrapper.setApiToken(apiKey);
-                        persistConfiguration(bootstrapper);
                         bootstrapper.startScanning();
                         return START_STICKY;
+                    }
+                    else {
+                        Logger.log.logError("No ApiToken present, we´e not able to work.");
                     }
                 } else {
                     bootstrapper.startScanning();
@@ -256,8 +269,9 @@ public class SensorbergService extends Service {
                     case MSG_SET_API_TOKEN: {
                         if (intent.hasExtra(MSG_SET_API_TOKEN_TOKEN)) {
                             String apiToken = intent.getStringExtra(MSG_SET_API_TOKEN_TOKEN);
-                            bootstrapper.setApiToken(apiToken);
-                            persistConfiguration(bootstrapper);
+                            if (platform.getTransport().setApiToken(apiToken)) {
+                                bootstrapper.unscheduleAllPendingActions();
+                            }
                         }
                         break;
                     }
@@ -338,6 +352,21 @@ public class SensorbergService extends Service {
             }
             Logger.log.serviceHandlesMessage(MSG.stringFrom(type));
             switch (type) {
+                case MSG_TYPE_SET_PAYLOAD: {
+                    if (intent.hasExtra(MSG_TYPE_SET_PAYLOAD_PAYLOAD)){
+                        String payload = intent.getStringExtra(MSG_TYPE_SET_PAYLOAD_PAYLOAD);
+                        try {
+                            JSONObject payloadJSON = new JSONObject(payload);
+                            platform.getTransport().setPayload(payloadJSON);
+                            diskConf.resolverConfiguration.setPayload(payloadJSON);
+                        } catch (JSONException e) {
+                            Logger.log.logError("payload was not proper JSONObject", e);
+                        }
+                    } else {
+                        Logger.log.logError("No payload content was provided");
+                    }
+                    break;
+                }
                 case MSG_TYPE_SET_RESOLVER_ENDPOINT: {
                     if (intent.hasExtra(MSG_SET_RESOLVER_ENDPOINT_ENDPOINT_URL)){
                         if (diskConf.resolverConfiguration == null){
@@ -365,7 +394,7 @@ public class SensorbergService extends Service {
     }
 
 
-    private boolean handleIntentEvenIfNoBootstrapperPresent(Intent intent) {
+    private boolean shouldShutdownService(Intent intent) {
         if (intent.hasExtra(EXTRA_GENERIC_TYPE)){
             int type = intent.getIntExtra(EXTRA_GENERIC_TYPE, -1);
             switch (type){
@@ -390,9 +419,13 @@ public class SensorbergService extends Service {
     private void createBootstrapperFromDiskConfiguration() {
         try {
             ServiceConfiguration diskConf = (ServiceConfiguration) FileHelper.getContentsOfFileOrNull(platform.getFile(SERVICE_CONFIGURATION));
+            if (diskConf == null){
+                diskConf = new ServiceConfiguration(new ResolverConfiguration());
+            }
             if (diskConf.resolverConfiguration.getResolverLayoutURL() != null){
                 URLFactory.setLayoutURL(diskConf.resolverConfiguration.getResolverLayoutURL().toString());
             }
+            platform.getTransport().setPayload(diskConf.resolverConfiguration.getPayload());
             if (diskConf.isComplete()) {
                 platform.getTransport().setApiToken(diskConf.resolverConfiguration.apiToken);
                 bootstrapper = new InternalApplicationBootstrapper(platform);
@@ -407,16 +440,6 @@ public class SensorbergService extends Service {
 
     private void persistConfiguration(ServiceConfiguration conf) {
         platform.write(conf, SERVICE_CONFIGURATION);
-    }
-
-    private void persistConfiguration(ResolverConfiguration resolverConfiguration) {
-        ServiceConfiguration conf = new ServiceConfiguration(resolverConfiguration);
-        persistConfiguration(conf);
-    }
-
-    private void persistConfiguration(InternalApplicationBootstrapper bootstrapper) {
-        persistConfiguration(
-                bootstrapper.resolver.configuration);
     }
 
     @Override

@@ -15,15 +15,13 @@ public final class Resolver implements RunLoop.MessageHandlerCallback {
     final Object listenersMonitor = new Object();
     final Object resolutionsMonitor = new Object();
 
-    public final ResolverConfiguration configuration;
     final List<ResolverListener> listeners = new ArrayList<ResolverListener>();
 
     final CurrentResolutions currentResolutions = new CurrentResolutions();
     private final Transport transport;
     private RunLoop runLoop;
 
-    public Resolver(ResolverConfiguration configuration, Platform platform) {
-        this.configuration = configuration;
+    public Resolver(Platform platform) {
         runLoop = platform.getResolverRunLoop(this);
         transport = platform.getTransport();
     }

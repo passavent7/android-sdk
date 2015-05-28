@@ -208,13 +208,6 @@ public class InternalApplicationBootstrapper extends MinimalBootstrapper impleme
         scanner.hostApplicationInBackground();
     }
 
-    public void setApiToken(String apiToken) {
-        platform.getTransport().setApiToken(apiToken);
-        if (resolver.configuration.setApiToken(apiToken)){
-            unscheduleAllPendingActions();
-        }
-    }
-
     public void updateSettings() {
         settings.updateValues();
     }

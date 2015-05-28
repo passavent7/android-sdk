@@ -51,6 +51,7 @@ public class OkHttpClientTransport implements Transport {
     private BeaconReportHandler beaconReportHandler;
     private ProximityUUIDUpdateHandler proximityUUIDUpdateHandler = ProximityUUIDUpdateHandler.NONE;
     private String apiToken;
+    private JSONObject payload = null;
 
     public OkHttpClientTransport(Platform platform, Settings settings) {
         this.platform = platform;
@@ -87,6 +88,11 @@ public class OkHttpClientTransport implements Transport {
             }
         };
         perform(Request.Method.GET, getResolveURLString(), null, listener, Response.ErrorListener.NONE, BaseResolveResponse.class, Collections.EMPTY_MAP, true);
+    }
+
+    @Override
+    public void setPayload(JSONObject payload) {
+        this.payload = payload;
     }
 
     @Override
@@ -181,8 +187,9 @@ public class OkHttpClientTransport implements Transport {
     }
 
     @Override
-    public void setApiToken(String apiToken) {
-        if (!Objects.equals(this.apiToken, apiToken)){
+    public boolean setApiToken(String apiToken) {
+        boolean changed = !Objects.equals(this.apiToken, apiToken);
+        if (changed){
             this.queue.getCache().clear();
         }
         this.apiToken = apiToken;
@@ -193,6 +200,7 @@ public class OkHttpClientTransport implements Transport {
             headers.remove("X-Api-Key");
             headers.remove("Authorization");
         }
+        return changed;
     }
 
     @Override
@@ -257,7 +265,7 @@ public class OkHttpClientTransport implements Transport {
             }
         };
 
-        HistoryBody body = new HistoryBody(scans, actions, platform.getClock());
+        HistoryBody body = new HistoryBody(scans, actions, platform.getClock(), payload);
 
         perform(Request.Method.POST, getResolveURLString(), body, responseListener, errorListener, ResolveResponse.class, Collections.EMPTY_MAP, false);
 

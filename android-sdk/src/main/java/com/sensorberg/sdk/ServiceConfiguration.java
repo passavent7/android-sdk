@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class ServiceConfiguration implements Serializable{
 
-    private static final long serialVersionUID = 3L;
+    private static final long serialVersionUID = 4L;
 
     public ResolverConfiguration resolverConfiguration;
 
@@ -15,7 +15,6 @@ public class ServiceConfiguration implements Serializable{
     }
 
     public boolean isComplete() {
-        return resolverConfiguration  != null &&
-                resolverConfiguration.apiToken != null;
+        return resolverConfiguration != null && resolverConfiguration.apiToken != null;
     }
 }

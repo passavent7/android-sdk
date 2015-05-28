@@ -6,9 +6,13 @@ import com.sensorberg.sdk.model.realm.RealmAction;
 import com.sensorberg.sdk.model.realm.RealmScan;
 import com.sensorberg.sdk.resolver.ResolutionConfiguration;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 public interface Transport {
+
+
 
     interface ProximityUUIDUpdateHandler{
         ProximityUUIDUpdateHandler NONE = new ProximityUUIDUpdateHandler() {
@@ -37,11 +41,15 @@ public interface Transport {
 
     void getBeacon(ResolutionConfiguration resolutionConfiguration, BeaconResponseHandler beaconResponseHandler);
 
-    void setApiToken(String apiToken);
+    boolean setApiToken(String apiToken);
+
+    String getApiToken();
 
     void getSettings(SettingsCallback settingsCallback);
 
     void publishHistory(List<RealmScan> scans, List<RealmAction> actions, HistoryCallback callback);
 
     void updateBeaconLayout();
+
+    void setPayload(JSONObject payload);
 }

@@ -46,7 +46,7 @@ public class TheHistoryBodyShould extends AndroidTestCase {
 
 
 
-        tested = new HistoryBody(realm.allObjects(RealmScan.class), null, clock);
+        tested = new HistoryBody(realm.allObjects(RealmScan.class), null, clock, payload);
     }
 
     public void test_should_be_serializeable() throws Exception {
