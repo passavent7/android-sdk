@@ -2,6 +2,7 @@ package com.sensorberg.sdk.test;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.multidex.MultiDex;
 
 import com.sensorberg.sdk.internal.URLFactory;
 
@@ -17,6 +18,7 @@ public class SensorbergTestRunner extends android.support.test.runner.AndroidJUn
 
     @Override
     public void onCreate(Bundle arguments) {
+        MultiDex.install(getTargetContext());
         super.onCreate(arguments);
         System.setProperty("dexmaker.dexcache", getContext().getCacheDir().getPath());
 
